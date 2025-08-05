@@ -40,10 +40,10 @@ dependencies:
     git: 
       url: https://github.com/AhmedShawkyAhmed/location_service.git
       ref: main
-  notification_service:
-    git: 
-      url: https://github.com/AhmedShawkyAhmed/notification_service.git
-      ref: main
+#  notification_service:
+#    git:
+#      url: https://github.com/AhmedShawkyAhmed/notification_service.git
+#      ref: main
   permission_service:
     git: 
       url: https://github.com/AhmedShawkyAhmed/permission_service.git
@@ -118,8 +118,8 @@ flutter:
   assets:
    - assets/
    - assets/images/
-   - assets/images/svgs
-   - assets/images/pngs
+   - assets/images/svgs/
+   - assets/images/pngs/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images

@@ -26,11 +26,11 @@ class AppRouter {
       case AppRoutes.splash:
         return RouteTransition.fade(page: const SplashScreen());
       case AppRoutes.onBoarding:
-        return RouteTransition.rightToLeft(page: const OnBoardingScreen());
+        return RouteTransition.fade(page: const OnBoardingScreen());
       case AppRoutes.register:
-        return RouteTransition.bottomToTop(page: const RegisterScreen());
+        return RouteTransition.fade(page: const RegisterScreen());
       case AppRoutes.login:
-        return RouteTransition.leftToRight(page: const LoginScreen());
+        return RouteTransition.fade(page: const LoginScreen());
       case AppRoutes.home:
         return RouteTransition.fade(page: const HomeScreen());
     }
