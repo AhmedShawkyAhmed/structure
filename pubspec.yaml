@@ -34,6 +34,58 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.8
+  flutter_localizations:
+    sdk: flutter
+  location_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/location_service.git
+      ref: main
+  notification_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/notification_service.git
+      ref: main
+  permission_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/permission_service.git
+      ref: main
+  security_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/security_service.git
+      ref: main
+  socket_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/socket_service.git
+      ref: main
+  hive_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/hive_service.git
+      ref: main
+  network_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/network_service.git
+      ref: main
+  core_utils:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/core_utils.git
+      ref: main
+  ui_kit:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/ui_kit.git
+      ref: main
+  navigation_service:
+    git: 
+      url: https://github.com/AhmedShawkyAhmed/navigation_service.git
+      ref: main
+  intl: ^0.20.2
+  bloc: ^9.0.0
+  flutter_bloc: ^9.1.1
+  dio: ^5.8.0+1
+  get_it: ^8.2.0
+  retrofit: ^4.7.0
+  json_annotation: ^4.9.0
+  freezed_annotation: ^3.1.0
+  cached_network_image: ^3.4.1
+  package_info_plus: ^8.3.0
 
 dev_dependencies:
   flutter_test:
@@ -44,7 +96,11 @@ dev_dependencies:
   # activated in the `analysis_options.yaml` file located at the root of your
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
-  flutter_lints: ^5.0.0
+  flutter_lints: ^6.0.0
+  retrofit_generator: ^10.0.1
+  build_runner: ^2.6.0
+  json_serializable: ^6.10.0
+  freezed: ^3.2.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
@@ -56,11 +112,14 @@ flutter:
   # included with your application, so that you can use the icons in
   # the material Icons class.
   uses-material-design: true
+  generate: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
-  #   - images/a_dot_burr.jpeg
-  #   - images/a_dot_ham.jpeg
+  assets:
+   - assets/
+   - assets/images/
+   - assets/images/svgs
+   - assets/images/pngs
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
