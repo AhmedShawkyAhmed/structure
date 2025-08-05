@@ -33,7 +33,7 @@ class CustomDioFactory extends DioFactory {
     dioInstance.interceptors.add(
       InterceptorsWrapper(
         onRequest: (options, handler) {
-          AppLogs.debugLog("API Path => ${options.path}");
+          AppLogs.debugLog('API Path => ${options.path}');
           options.headers['Authorization'] = 'Bearer ${Globals.token}';
           handler.next(options);
         },

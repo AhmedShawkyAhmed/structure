@@ -25,7 +25,7 @@ class LocalizationHelper {
   ///
   /// If context is null, it will use [AppLocalizationsAr]
   static AppLocalizations get tr {
-    var context = NavigationService.navigatorKey.currentContext;
+    final context = NavigationService.navigatorKey.currentContext;
     if (context != null) {
       return AppLocalizations.of(context);
     } else {
@@ -35,7 +35,7 @@ class LocalizationHelper {
   }
 
   static bool get isArabic {
-    var context = NavigationService.navigatorKey.currentContext;
+    final context = NavigationService.navigatorKey.currentContext;
     if (context == null) {
       AppLogs.errorLog('Localization: can\'t find context, using ar fallback');
       return true;

@@ -878,10 +878,10 @@ packages:
     description:
       path: "."
       ref: main
-      resolved-ref: "3df3630b8c1a7124db399ede60b9f65e04020576"
+      resolved-ref: ada0bebbb2432729ba20b6f27558cb7f90553ebc
       url: "https://github.com/AhmedShawkyAhmed/network_service.git"
     source: git
-    version: "0.0.2"
+    version: "0.0.3"
   nm:
     dependency: transitive
     description:

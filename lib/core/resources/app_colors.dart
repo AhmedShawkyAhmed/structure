@@ -102,7 +102,7 @@ class AppColors {
   /// Linear
   static final gradientRed1 = HexColor('FF4D67');
   static final gradientRed2 = HexColor('FF8A9B');
-  static final regGradient = HexColor("FF6E76");
+  static final regGradient = HexColor('FF6E76');
 
   /// ----------------------------------------------- \\\
 
