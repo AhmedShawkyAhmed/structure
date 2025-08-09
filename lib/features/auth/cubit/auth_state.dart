@@ -1,14 +1,14 @@
-part of 'auth_cubit.dart';
+import 'package:freezed_annotation/freezed_annotation.dart';
+import 'package:network_service/network_service.dart';
 
-@immutable
-sealed class AuthState {}
+part 'auth_state.freezed.dart';
 
-final class AuthInitial extends AuthState {}
+@freezed
+class AuthState<T> with _$AuthState<T> {
+  const factory AuthState.loading() = Loading<T>;
 
-final class LoginLoading extends AuthState {}
-final class LoginSuccess extends AuthState {}
-final class LoginFailure extends AuthState {}
+  const factory AuthState.success(T data) = Success<T>;
 
-final class RegisterLoading extends AuthState {}
-final class RegisterSuccess extends AuthState {}
-final class RegisterFailure extends AuthState {}
+  const factory AuthState.error(NetworkExceptions error) =
+  Error<T>;
+}

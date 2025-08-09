@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:hive_service/hive_service.dart';
 import 'package:network_service/network_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:structure/core/application/app.dart';
@@ -17,7 +18,7 @@ void main() async {
   //   SystemUiOverlayStyle(statusBarColor: AppColors.greyScale50),
   // );
 
-  // await DatabaseHelper.init();
+  await HiveService.init();
   // await NotificationService.init(
   //   options: DefaultFirebaseOptions.currentPlatform,
   //   onClickAction: (String? payload) async {},
