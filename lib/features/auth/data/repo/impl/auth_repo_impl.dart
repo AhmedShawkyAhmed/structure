@@ -9,8 +9,9 @@ import 'package:structure/features/auth/service/auth_web_service.dart';
 
 class AuthRepoImpl implements IAuthRepo {
   final AuthWebService _authWebService;
+  final HiveService _hiveService;
 
-  AuthRepoImpl(this._authWebService);
+  AuthRepoImpl(this._authWebService, this._hiveService);
 
   @override
   Future<NetworkResult<NetworkBaseModel>> login({
@@ -29,7 +30,7 @@ class AuthRepoImpl implements IAuthRepo {
 
     result.when(
       success: (response) {
-        HiveService.putItem(
+        _hiveService.putItem(
           boxName: CacheBoxName.appBox,
           key: CacheKeys.fcmToken,
           item: response.data?.token,
@@ -42,14 +43,14 @@ class AuthRepoImpl implements IAuthRepo {
   }
 
   String? getToken() {
-    return HiveService.getItem(
+    return _hiveService.getItem(
       boxName: CacheBoxName.appBox,
       key: CacheKeys.fcmToken,
     );
   }
 
   Future<void> clearToken() async {
-    await HiveService.deleteItem(
+    await _hiveService.deleteItem(
       boxName: CacheBoxName.appBox,
       key: CacheKeys.fcmToken,
     );
