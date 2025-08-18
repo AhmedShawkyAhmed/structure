@@ -12,4 +12,3 @@ extension DefaultException on DefaultSnackbar {
     return const SizedBox.shrink();
   }
 }
-

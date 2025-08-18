@@ -9,6 +9,5 @@ class AuthState<T> with _$AuthState<T> {
 
   const factory AuthState.success(T data) = Success<T>;
 
-  const factory AuthState.error(NetworkExceptions error) =
-  Error<T>;
+  const factory AuthState.error(NetworkExceptions error) = Error<T>;
 }

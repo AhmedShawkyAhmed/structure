@@ -1,4 +1,3 @@
-import 'package:dio/dio.dart';
 import 'package:network_service/network_service.dart';
 import 'package:retrofit/retrofit.dart';
 import 'package:structure/core/network/api_routes.dart';
@@ -16,5 +15,7 @@ abstract class AuthWebService {
   Future<NetworkBaseModel> login({@Body() required LoginRequest request});
 
   @POST(APIRoutes.register)
-  Future<NetworkBaseModel<UserModel>> register({@Body() required RegisterRequest request});
+  Future<NetworkBaseModel<UserModel>> register({
+    @Body() required RegisterRequest request,
+  });
 }

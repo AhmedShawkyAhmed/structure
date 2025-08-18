@@ -58,18 +58,17 @@ class _LoginScreenState extends State<LoginScreen> {
                 builder: (context, state) {
                   return state.maybeWhen(
                     loading: () => const CircularProgressIndicator(),
-                    orElse: () =>
-                        DefaultButton(
-                          title: 'Login',
-                          onTap: () {
-                            authCubit.login(
-                              request: LoginRequest(
-                                email: _emailController.text,
-                                password: _passwordController.text,
-                              ),
-                            );
-                          },
-                        ),
+                    orElse: () => DefaultButton(
+                      title: 'Login',
+                      onTap: () {
+                        authCubit.login(
+                          request: LoginRequest(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          ),
+                        );
+                      },
+                    ),
                   );
                 },
               ),

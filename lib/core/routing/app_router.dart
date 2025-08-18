@@ -8,11 +8,12 @@ import 'package:structure/features/on_boarding/ui/screens/on_boarding_screen.dar
 import 'package:structure/features/shared/ui/screens/un_known_screen.dart';
 import 'package:structure/features/splash/ui/screens/splash_screen.dart';
 
-
 class AppRouter {
   Route? onGenerateRoute(RouteSettings settings) {
-    AppRoutes navigatedRoute = AppRoutes.values
-        .firstWhereOrNull((route) => route.path == settings.name) ??
+    AppRoutes navigatedRoute =
+        AppRoutes.values.firstWhereOrNull(
+          (route) => route.path == settings.name,
+        ) ??
         AppRoutes.unknown;
     AppLogs.routeLog('NavigatedRoute: $navigatedRoute', runtimeType: AppRouter);
 

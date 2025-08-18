@@ -17,9 +17,7 @@ void main() async {
   // customError();
   WidgetsFlutterBinding.ensureInitialized();
   // 🔹 Lock orientation
-  await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.portraitUp,
-  ]);
+  await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
 
   // 🔹 Set status bar color
   SystemChrome.setSystemUIOverlayStyle(

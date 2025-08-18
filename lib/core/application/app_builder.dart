@@ -9,8 +9,7 @@ Widget defaultAppBuilder(BuildContext context, Widget? child) {
     child: Column(
       children: [
         Expanded(child: child ?? const SizedBox()),
-        if(APIRoutes.environment != Environment.production)
-          const TestWidget(),
+        if (APIRoutes.environment != Environment.production) const TestWidget(),
       ],
     ),
   );

@@ -1,6 +1,5 @@
 import 'dart:io';
 import 'package:core_utils/core_utils.dart';
-import 'package:dio/dio.dart';
 import 'package:dio/io.dart';
 import 'package:flutter/services.dart';
 import 'package:network_service/network_service.dart';
@@ -20,7 +19,6 @@ class CustomDioFactory extends DioFactory {
 
   static Future<void> initialize() async {
     Dio dioInstance;
-
 
     if (APIRoutes.environment == Environment.production) {
       dioInstance = await _createSecuredDio();
@@ -46,29 +44,31 @@ class CustomDioFactory extends DioFactory {
   }
 
   static Dio _createUnsecuredDio() {
-    final dio = Dio(BaseOptions(
-      baseUrl: APIRoutes.baseUrl,
-      receiveDataWhenStatusError: true,
-      connectTimeout: const Duration(seconds: 180),
-      sendTimeout: const Duration(seconds: 100),
-    ));
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: APIRoutes.baseUrl,
+        receiveDataWhenStatusError: true,
+        connectTimeout: const Duration(seconds: 180),
+        sendTimeout: const Duration(seconds: 100),
+      ),
+    );
 
-    dio.interceptors.add(LogInterceptor(
-      requestBody: true,
-      responseBody: true,
-      error: true,
-    ));
+    dio.interceptors.add(
+      LogInterceptor(requestBody: true, responseBody: true, error: true),
+    );
 
     return dio;
   }
 
   static Future<Dio> _createSecuredDio() async {
-    final dio = Dio(BaseOptions(
-      baseUrl: APIRoutes.baseUrl,
-      receiveDataWhenStatusError: true,
-      connectTimeout: const Duration(seconds: 180),
-      sendTimeout: const Duration(seconds: 100),
-    ));
+    final dio = Dio(
+      BaseOptions(
+        baseUrl: APIRoutes.baseUrl,
+        receiveDataWhenStatusError: true,
+        connectTimeout: const Duration(seconds: 180),
+        sendTimeout: const Duration(seconds: 100),
+      ),
+    );
 
     final context = SecurityContext(withTrustedRoots: false);
     final cert = await rootBundle.load('assets/certificates/my_cert.pem');
@@ -85,11 +85,9 @@ class CustomDioFactory extends DioFactory {
 
     dio.httpClientAdapter = adapter;
 
-    dio.interceptors.add(LogInterceptor(
-      requestBody: true,
-      responseBody: true,
-      error: true,
-    ));
+    dio.interceptors.add(
+      LogInterceptor(requestBody: true, responseBody: true, error: true),
+    );
 
     return dio;
   }

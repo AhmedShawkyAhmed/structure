@@ -21,7 +21,6 @@ class AppColors {
   static const orange = Color(0xffff860f);
   static const transparent = Color(0x00ffffff);
 
-
   /// Main Colors
   /// Primary
   static final primaryColor500 = HexColor('7210FF');
@@ -135,7 +134,7 @@ class AppColors {
   static final deepOrangeColor = HexColor('FF5722');
   static final brownColor = HexColor('795548');
   static final blueGreyColor = HexColor('607D8A');
-  static final  lightGrey = HexColor('E5E5E5');
+  static final lightGrey = HexColor('E5E5E5');
 
   /// ----------------------------------------------- \\\
 

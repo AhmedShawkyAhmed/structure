@@ -4,8 +4,7 @@ enum AppRoutes {
   onBoarding,
   register,
   login,
-  home,
-  ;
+  home;
 
   String get path => '/${name.toString()}';
 }
