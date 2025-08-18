@@ -16,17 +16,16 @@ String? fcmToken;
 void main() async {
   // customError();
   WidgetsFlutterBinding.ensureInitialized();
-  // 🔹 Lock orientation to landscape
+  // 🔹 Lock orientation
   await SystemChrome.setPreferredOrientations([
-    DeviceOrientation.landscapeLeft,
-    DeviceOrientation.landscapeRight,
+    DeviceOrientation.portraitUp,
   ]);
 
   // 🔹 Set status bar color
   SystemChrome.setSystemUIOverlayStyle(
     SystemUiOverlayStyle(
-      statusBarColor: AppColors.greyScale50, // your custom color
-      statusBarIconBrightness: Brightness.dark, // optional
+      statusBarColor: AppColors.greyScale50,
+      statusBarIconBrightness: Brightness.dark,
     ),
   );
 
