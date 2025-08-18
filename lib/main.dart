@@ -16,8 +16,18 @@ String? fcmToken;
 void main() async {
   // customError();
   WidgetsFlutterBinding.ensureInitialized();
+  // 🔹 Lock orientation to landscape
+  await SystemChrome.setPreferredOrientations([
+    DeviceOrientation.landscapeLeft,
+    DeviceOrientation.landscapeRight,
+  ]);
+
+  // 🔹 Set status bar color
   SystemChrome.setSystemUIOverlayStyle(
-    SystemUiOverlayStyle(statusBarColor: AppColors.greyScale50),
+    SystemUiOverlayStyle(
+      statusBarColor: AppColors.greyScale50, // your custom color
+      statusBarIconBrightness: Brightness.dark, // optional
+    ),
   );
 
   await HiveService.init();
