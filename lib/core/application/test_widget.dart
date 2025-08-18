@@ -9,14 +9,14 @@ class TestWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      height: 25.h,
+      height: 2.h,
       decoration: const BoxDecoration(color: AppColors.black),
       child: Center(
         child: Text(
           'Version ${packageInfo.version}+${packageInfo.buildNumber}',
           style: TextStyle(
             color: AppColors.white,
-            fontSize: 15.sp,
+            fontSize: 2.r,
             decoration: TextDecoration.none,
           ),
         ),

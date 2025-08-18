@@ -9,17 +9,15 @@ import 'package:structure/features/shared/ui/screens/un_known_screen.dart';
 import 'package:structure/features/splash/ui/screens/splash_screen.dart';
 
 class AppRouter {
-  Route? onGenerateRoute(RouteSettings settings) {
-    AppRoutes navigatedRoute =
-        AppRoutes.values.firstWhereOrNull(
-          (route) => route.path == settings.name,
-        ) ??
-        AppRoutes.unknown;
-    AppLogs.routeLog('NavigatedRoute: $navigatedRoute', runtimeType: AppRouter);
+  Route<dynamic> onGenerateRoute(RouteSettings settings) {
+    final String routeName = settings.name == '/' ? AppRoutes.splash.path : settings.name ?? '';
 
-    if (settings.name == '/') {
-      navigatedRoute = AppRoutes.splash;
-    }
+    final AppRoutes navigatedRoute = AppRoutes.values.firstWhereOrNull(
+          (route) => route.path == routeName,
+    ) ??
+        AppRoutes.unknown;
+
+    AppLogs.routeLog('NavigatedRoute: $navigatedRoute', runtimeType: AppRouter);
 
     switch (navigatedRoute) {
       case AppRoutes.unknown:
@@ -37,3 +35,4 @@ class AppRouter {
     }
   }
 }
+

@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_service/hive_service.dart';
-import 'package:network_service/network_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:structure/core/application/app.dart';
 import 'package:structure/core/di/service_locator.dart';
@@ -42,7 +41,7 @@ void main() async {
   // fcmToken = await NotificationService.getFCMToken();
   await setupServiceLocator();
   CustomDioFactory.initialize();
-  NetworkStatusService.instance.init();
+  // NetworkStatusService.instance.init();
   Bloc.observer = BlocObserverService();
   packageInfo = await PackageInfo.fromPlatform();
 

@@ -1,3 +1,4 @@
+import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_service/navigation_service.dart';
 import 'package:structure/core/helpers/localization_helper.dart';
@@ -19,6 +20,12 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   final AppRouter routes = AppRouter();
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    AppSizeConfig.init(context);
+  }
 
   @override
   Widget build(BuildContext context) {
