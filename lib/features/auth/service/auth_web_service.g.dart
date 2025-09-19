@@ -30,7 +30,7 @@ class _AuthWebService implements AuthWebService {
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'login',
+            'counter',
             queryParameters: queryParameters,
             data: _data,
           )
