@@ -40,7 +40,7 @@ void main() async {
   // };
   // fcmToken = await NotificationService.getFCMToken();
   await setupServiceLocator();
-  CustomDioFactory.initialize();
+  // CustomDioFactory();
   // NetworkStatusService.instance.init();
   Bloc.observer = BlocObserverService();
   packageInfo = await PackageInfo.fromPlatform();
