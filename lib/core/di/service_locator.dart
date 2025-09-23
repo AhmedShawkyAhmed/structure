@@ -17,7 +17,7 @@ Future<void> setupServiceLocator() async {
     () => AuthWebService(DioFactory.dio),
   );
 
-  // --------------------- Repo (bind interface to implementation)
+  // --------------------- Repo (bind inheritance to implementation)
   serviceLocator.registerLazySingleton<IAuthRepo>(
     () => AuthRepoImpl(
       serviceLocator<AuthWebService>(),
@@ -25,7 +25,7 @@ Future<void> setupServiceLocator() async {
     ),
   );
 
-  // --------------------- Cubit (depends on interface)
+  // --------------------- Cubit (depends on inheritance)
   serviceLocator.registerFactory<AuthCubit>(
     () => AuthCubit(serviceLocator<IAuthRepo>()),
   );
