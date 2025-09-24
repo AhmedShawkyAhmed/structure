@@ -3,6 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:structure/architecture/mvc/counter/controller/counter_controller.dart';
 
 class CounterView extends StatelessWidget {
+  const CounterView({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(

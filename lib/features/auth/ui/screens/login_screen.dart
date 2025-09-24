@@ -47,8 +47,13 @@ class _LoginScreenState extends State<LoginScreen> {
             children: [
               const Text('Login Screen'),
 
-              DefaultTextField(controller: _emailController, hintText: 'Email'),
               DefaultTextField(
+                key: const Key('login_email_field'),
+                controller: _emailController,
+                hintText: 'Email',
+              ),
+              DefaultTextField(
+                key: const Key('login_password_field'),
                 controller: _passwordController,
                 hintText: 'Password',
                 password: true,
@@ -59,6 +64,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   return state.maybeWhen(
                     loading: () => const CircularProgressIndicator(),
                     orElse: () => DefaultButton(
+                      key: const Key('login_button'),
                       title: 'Login',
                       onTap: () {
                         authCubit.login(
