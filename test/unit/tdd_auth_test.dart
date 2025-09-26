@@ -1,6 +1,6 @@
 import 'package:flutter_test/flutter_test.dart';
+import 'package:structure/TDD/tdd_auth_repo_impl.dart';
 import 'package:structure/features/auth/data/models/user_model.dart';
-import 'package:structure/tdd_auth_repo_impl.dart';
 
 void main() {
   test('login should return success if credentials are valid', () async {

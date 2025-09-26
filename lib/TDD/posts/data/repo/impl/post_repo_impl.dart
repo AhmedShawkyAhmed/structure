@@ -1,7 +1,7 @@
 import 'package:network_service/network_service.dart';
-import 'package:structure/TDD/data/models/post_model.dart';
-import 'package:structure/TDD/data/repo/interface/i_post_repo.dart';
-import 'package:structure/TDD/service/post_web_service.dart';
+import 'package:structure/TDD/posts/data/models/post_model.dart';
+import 'package:structure/TDD/posts/data/repo/interface/i_post_repo.dart';
+import 'package:structure/TDD/posts/service/post_web_service.dart';
 
 class PostRepoImpl extends IPostRepo {
   final PostWebService _postWebService;

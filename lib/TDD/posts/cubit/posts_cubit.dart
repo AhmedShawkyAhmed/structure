@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
 import 'package:network_service/network_service.dart';
-import 'package:structure/TDD/cubit/posts_state.dart';
-import 'package:structure/TDD/data/models/post_model.dart';
-import 'package:structure/TDD/data/repo/interface/i_post_repo.dart';
+import 'package:structure/TDD/posts/cubit/posts_state.dart';
+import 'package:structure/TDD/posts/data/models/post_model.dart';
+import 'package:structure/TDD/posts/data/repo/interface/i_post_repo.dart';
 
 class PostsCubit extends Cubit<PostsState> {
   PostsCubit(this.postRepo) : super(const PostsState.initial());

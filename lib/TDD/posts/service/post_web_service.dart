@@ -1,6 +1,6 @@
 import 'package:network_service/network_service.dart';
 import 'package:retrofit/retrofit.dart';
-import 'package:structure/TDD/data/models/post_model.dart';
+import 'package:structure/TDD/posts/data/models/post_model.dart';
 import 'package:structure/core/network/api_routes.dart';
 
 part 'post_web_service.g.dart';
