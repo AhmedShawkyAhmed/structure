@@ -1,6 +1,6 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'auth_web_service.dart';
+part of 'post_web_service.dart';
 
 // dart format off
 
@@ -10,8 +10,8 @@ part of 'auth_web_service.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps,no_leading_underscores_for_local_identifiers,unused_element,unnecessary_string_interpolations,unused_element_parameter
 
-class _AuthWebService implements AuthWebService {
-  _AuthWebService(this._dio, {this.baseUrl, this.errorLogger});
+class _PostWebService implements PostWebService {
+  _PostWebService(this._dio, {this.baseUrl, this.errorLogger});
 
   final Dio _dio;
 
@@ -20,30 +20,33 @@ class _AuthWebService implements AuthWebService {
   final ParseErrorLogger? errorLogger;
 
   @override
-  Future<NetworkBaseModel<dynamic>> login({
-    required LoginRequest request,
-  }) async {
+  Future<NetworkBaseModel<List<PostModel>>> getPosts() async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
-    final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _options = _setStreamType<NetworkBaseModel<dynamic>>(
-      Options(method: 'POST', headers: _headers, extra: _extra)
+    const Map<String, dynamic>? _data = null;
+    final _options = _setStreamType<NetworkBaseModel<List<PostModel>>>(
+      Options(method: 'GET', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'counter',
+            'getPosts',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late NetworkBaseModel<dynamic> _value;
+    late NetworkBaseModel<List<PostModel>> _value;
     try {
-      _value = NetworkBaseModel<dynamic>.fromJson(
+      _value = NetworkBaseModel<List<PostModel>>.fromJson(
         _result.data!,
-        (json) => json as dynamic,
+        (json) => json is List<dynamic>
+            ? json
+                  .map<PostModel>(
+                    (i) => PostModel.fromJson(i as Map<String, dynamic>),
+                  )
+                  .toList()
+            : List.empty(),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);
@@ -53,30 +56,28 @@ class _AuthWebService implements AuthWebService {
   }
 
   @override
-  Future<NetworkBaseModel<UserModel>> register({
-    required RegisterRequest request,
-  }) async {
+  Future<NetworkBaseModel<PostModel>> addPost({required PostModel post}) async {
     final _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _headers = <String, dynamic>{};
     final _data = <String, dynamic>{};
-    _data.addAll(request.toJson());
-    final _options = _setStreamType<NetworkBaseModel<UserModel>>(
+    _data.addAll(post.toJson());
+    final _options = _setStreamType<NetworkBaseModel<PostModel>>(
       Options(method: 'POST', headers: _headers, extra: _extra)
           .compose(
             _dio.options,
-            'register',
+            'addPost',
             queryParameters: queryParameters,
             data: _data,
           )
           .copyWith(baseUrl: _combineBaseUrls(_dio.options.baseUrl, baseUrl)),
     );
     final _result = await _dio.fetch<Map<String, dynamic>>(_options);
-    late NetworkBaseModel<UserModel> _value;
+    late NetworkBaseModel<PostModel> _value;
     try {
-      _value = NetworkBaseModel<UserModel>.fromJson(
+      _value = NetworkBaseModel<PostModel>.fromJson(
         _result.data!,
-        (json) => UserModel.fromJson(json as Map<String, dynamic>),
+        (json) => PostModel.fromJson(json as Map<String, dynamic>),
       );
     } on Object catch (e, s) {
       errorLogger?.logError(e, s, _options);

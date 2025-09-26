@@ -1,5 +1,9 @@
 import 'package:get_it/get_it.dart';
 import 'package:hive_service/hive_service.dart';
+import 'package:structure/TDD/cubit/posts_cubit.dart';
+import 'package:structure/TDD/data/repo/impl/post_repo_impl.dart';
+import 'package:structure/TDD/data/repo/interface/i_post_repo.dart';
+import 'package:structure/TDD/service/post_web_service.dart';
 import 'package:structure/core/network/custom_dio_factory.dart';
 import 'package:structure/features/auth/cubit/auth_cubit.dart';
 import 'package:structure/features/auth/data/repo/impl/auth_repo_impl.dart';
@@ -16,6 +20,9 @@ Future<void> setupServiceLocator() async {
   serviceLocator.registerLazySingleton<AuthWebService>(
     () => AuthWebService(CustomDioFactory.dio),
   );
+  serviceLocator.registerLazySingleton<PostWebService>(
+    () => PostWebService(CustomDioFactory.dio),
+  );
 
   // --------------------- Repo (bind inheritance to implementation)
   serviceLocator.registerLazySingleton<IAuthRepo>(
@@ -24,9 +31,15 @@ Future<void> setupServiceLocator() async {
       serviceLocator<HiveService>(),
     ),
   );
+  serviceLocator.registerLazySingleton<IPostRepo>(
+    () => PostRepoImpl(serviceLocator<PostWebService>()),
+  );
 
   // --------------------- Cubit (depends on inheritance)
   serviceLocator.registerFactory<AuthCubit>(
     () => AuthCubit(serviceLocator<IAuthRepo>()),
+  );
+  serviceLocator.registerFactory<PostsCubit>(
+    () => PostsCubit(serviceLocator<IPostRepo>()),
   );
 }

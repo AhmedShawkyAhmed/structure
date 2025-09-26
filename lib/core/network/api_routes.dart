@@ -7,4 +7,6 @@ class APIRoutes {
   static const login = 'counter';
   static const register = 'register';
   static const getHome = 'getHome';
+  static const getPosts = 'getPosts';
+  static const addPost = 'addPost';
 }
