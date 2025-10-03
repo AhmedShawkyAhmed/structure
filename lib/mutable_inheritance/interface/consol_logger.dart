@@ -1,6 +1,6 @@
 import 'package:core_utils/core_utils.dart';
-import 'package:structure/interface/i_logger.dart';
-import 'package:structure/interface/logger_interface.dart';
+import 'package:structure/mutable_inheritance/interface/i_logger.dart';
+import 'package:structure/mutable_inheritance/interface/logger_interface.dart';
 
 class ConsoleLogger implements LoggerInterface,ILogger {
   @override
