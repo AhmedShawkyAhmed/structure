@@ -49,7 +49,14 @@ class CustomDioFactory extends DioFactory {
     );
 
     dio.interceptors.add(
-      LogInterceptor(requestBody: true, responseBody: true, error: true),
+      LogInterceptor(
+        request: false,
+        requestHeader: false,
+        requestBody: true,
+        responseHeader: false,
+        responseBody: true,
+        error: true,
+      ),
     );
 
     return dio;
