@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:structure/core/routing/app_routes.dart';
 import 'package:structure/features/auth/ui/screens/login_screen.dart';
 import 'package:structure/features/auth/ui/screens/register_screen.dart';
+import 'package:structure/features/device_info/ui/screens/device_diagnostics_screen.dart';
 import 'package:structure/features/home/ui/screens/home_screen.dart';
 import 'package:structure/features/on_boarding/ui/screens/on_boarding_screen.dart';
 import 'package:structure/features/shared/ui/screens/un_known_screen.dart';
@@ -10,11 +11,12 @@ import 'package:structure/features/splash/ui/screens/splash_screen.dart';
 
 class AppRouter {
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
-    final String routeName = settings.name == '/' ? AppRoutes.splash.path : settings.name ?? '';
+    final String routeName = settings.name == '/'
+        ? AppRoutes.deviceInfo.path
+        : settings.name ?? '';
 
-    final AppRoutes navigatedRoute = AppRoutes.values.firstWhereOrNull(
-          (route) => route.path == routeName,
-    ) ??
+    final AppRoutes navigatedRoute =
+        AppRoutes.values.firstWhereOrNull((route) => route.path == routeName) ??
         AppRoutes.unknown;
 
     AppLogs.routeLog('NavigatedRoute: $navigatedRoute', runtimeType: AppRouter);
@@ -22,6 +24,8 @@ class AppRouter {
     switch (navigatedRoute) {
       case AppRoutes.unknown:
         return RouteTransition.fade(page: const UnKnownScreen());
+      case AppRoutes.deviceInfo:
+        return RouteTransition.fade(page: const DeviceDiagnosticsScreen());
       case AppRoutes.splash:
         return RouteTransition.fade(page: const SplashScreen());
       case AppRoutes.onBoarding:
@@ -35,4 +39,3 @@ class AppRouter {
     }
   }
 }
-

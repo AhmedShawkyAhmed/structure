@@ -1,5 +1,6 @@
 enum AppRoutes {
   unknown,
+  deviceInfo,
   splash,
   onBoarding,
   register,
