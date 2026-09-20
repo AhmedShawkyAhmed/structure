@@ -3,8 +3,8 @@ import 'dart:ui' show Locale;
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_udid/flutter_udid.dart';
 import 'package:package_info_plus/package_info_plus.dart';
+import 'package:structure/core/services/device_identity_service.dart';
 
 class DeviceSnapshot {
   const DeviceSnapshot({required this.sections, required this.capturedAt});
@@ -76,29 +76,26 @@ class DeviceDiagnosticsService {
         (defaultTargetPlatform == TargetPlatform.android ||
             defaultTargetPlatform == TargetPlatform.iOS)) {
       try {
-        final String udid = await FlutterUdid.udid;
-        final String consistentUdid = await FlutterUdid.consistentUdid;
+        final DeviceIdentityService identity = DeviceIdentityService.instance;
+        final String selectedId = await identity.getSelectedId();
+        await identity.refreshFlutterUdid();
+        final DeviceIdentitySnapshot saved = await identity.snapshot();
 
-        debugPrint('FLUTTER_UDID: $udid');
+        debugPrint('SELECTED_DEVICE_ID: $selectedId');
 
         sections['Identity'] = <String, Object?>{
-          'udid': udid,
-          'consistentUdid': consistentUdid,
-          'provider': 'flutter_udid',
-          'scopeNote': defaultTargetPlatform == TargetPlatform.iOS
-              ? 'IDFV persisted in Keychain; survives logout and may survive reinstall'
-              : 'ANDROID_ID; survives logout and normally reinstall with the same signing key',
+          'selectedId': saved.selectedId,
+          'source': saved.source,
+          'flutterUdid': saved.flutterUdid,
+          'randomFallback': saved.fallbackUuid,
+          'scopeNote':
+              'The selected ID stays fixed while app preferences exist. '
+              'A later FlutterUdid result is saved but never replaces it.',
         };
-      } on PlatformException catch (error) {
+      } on Object catch (error) {
         sections['Identity'] = <String, Object?>{
           'status': 'Unavailable',
-          'provider': 'flutter_udid',
-          'error': error.message ?? error.code,
-        };
-      } on MissingPluginException {
-        sections['Identity'] = <String, Object?>{
-          'status': 'Plugin unavailable',
-          'provider': 'flutter_udid',
+          'error': error.toString(),
         };
       }
 

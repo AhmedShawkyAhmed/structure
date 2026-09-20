@@ -5,6 +5,7 @@ import 'package:hive_service/hive_service.dart';
 import 'package:package_info_plus/package_info_plus.dart';
 import 'package:structure/core/application/app.dart';
 import 'package:structure/core/di/service_locator.dart';
+import 'package:structure/core/network/custom_dio_factory.dart';
 import 'package:structure/core/resources/app_colors.dart';
 import 'package:structure/core/services/bloc_observer.dart';
 
@@ -38,8 +39,8 @@ void main() async {
   //   return true;
   // };
   // fcmToken = await NotificationService.getFCMToken();
+  await CustomDioFactory.initialize();
   await setupServiceLocator();
-  // CustomDioFactory();
   // NetworkStatusService.instance.init();
   Bloc.observer = BlocObserverService();
   packageInfo = await PackageInfo.fromPlatform();

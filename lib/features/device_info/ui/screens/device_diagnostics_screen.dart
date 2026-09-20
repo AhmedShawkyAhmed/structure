@@ -84,7 +84,7 @@ class _DeviceDiagnosticsScreenState extends State<DeviceDiagnosticsScreen> {
             slivers: <Widget>[
               SliverToBoxAdapter(
                 child: _Header(
-                  marker: _deviceUdid,
+                  marker: _selectedDeviceId,
                   isLoading: _isLoading,
                   onRefresh: _load,
                   onCopy: _copyJson,
@@ -150,8 +150,8 @@ class _DeviceDiagnosticsScreenState extends State<DeviceDiagnosticsScreen> {
     );
   }
 
-  String? get _deviceUdid {
-    final Object? value = _snapshot?.sections['Identity']?['udid'];
+  String? get _selectedDeviceId {
+    final Object? value = _snapshot?.sections['Identity']?['selectedId'];
     return value?.toString();
   }
 
@@ -269,7 +269,7 @@ class _Header extends StatelessWidget {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(
-                        'DEVICE UDID',
+                        'SELECTED DEVICE ID',
                         style: Theme.of(context).textTheme.labelSmall?.copyWith(
                           color: Colors.white.withValues(alpha: 0.7),
                           fontWeight: FontWeight.w800,

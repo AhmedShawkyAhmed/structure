@@ -1,6 +1,7 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:network_service/network_service.dart';
 import 'package:structure/core/network/api_routes.dart';
+import 'package:structure/core/services/device_identity_service.dart';
 
 class CustomDioFactory extends DioFactory {
   static final CustomDioFactory _instance = CustomDioFactory._internal(
@@ -25,10 +26,23 @@ class CustomDioFactory extends DioFactory {
     DioFactory.setDio(dioInstance);
     dioInstance.interceptors.add(
       InterceptorsWrapper(
-        onRequest: (options, handler) {
+        onRequest: (options, handler) async {
           AppLogs.debugLog('API Path => ${options.path}');
           options.headers['Authorization'] = 'Bearer Token';
-          handler.next(options);
+          try {
+            options.headers['X-Device-Id'] = await DeviceIdentityService
+                .instance
+                .getSelectedId();
+            handler.next(options);
+          } on Object catch (error, stackTrace) {
+            handler.reject(
+              DioException(
+                requestOptions: options,
+                error: error,
+                stackTrace: stackTrace,
+              ),
+            );
+          }
         },
         onError: (error, handler) {
           AppLogs.errorLog(error);
