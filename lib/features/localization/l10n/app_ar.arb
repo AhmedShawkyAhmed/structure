@@ -1,4 +1,9 @@
 {
   "arabic": "عربي",
-  "english": "إنجليزي"
+  "english": "إنجليزي",
+  "musicHeroTitle": "موسيقى لكل لحظة",
+  "musicHeroSubtitle": "اكتشف أحدث الأغاني واستمتع بمقاطع مدتها 30 ثانية.",
+  "musicEmptyTitle": "الموسيقى تأخذ استراحة قصيرة",
+  "musicEmptySubtitle": "تعذر تحميل أحدث الأغاني. حاول مرة أخرى.",
+  "tryAgain": "حاول مرة أخرى"
 }

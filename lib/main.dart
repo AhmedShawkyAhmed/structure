@@ -8,6 +8,7 @@ import 'package:structure/core/di/service_locator.dart';
 import 'package:structure/core/network/custom_dio_factory.dart';
 import 'package:structure/core/resources/app_colors.dart';
 import 'package:structure/core/services/bloc_observer.dart';
+import 'package:structure/features/home/data/twist_music_setup.dart';
 
 late PackageInfo packageInfo;
 String? fcmToken;
@@ -41,6 +42,7 @@ void main() async {
   // fcmToken = await NotificationService.getFCMToken();
   await CustomDioFactory.initialize();
   await setupServiceLocator();
+  await initializeTwistMusicPlayer();
   // NetworkStatusService.instance.init();
   Bloc.observer = BlocObserverService();
   packageInfo = await PackageInfo.fromPlatform();

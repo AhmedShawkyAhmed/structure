@@ -13,4 +13,21 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get english => 'English';
+
+  @override
+  String get musicHeroTitle => 'Music for every moment';
+
+  @override
+  String get musicHeroSubtitle =>
+      'Discover new tracks and enjoy 30-second previews.';
+
+  @override
+  String get musicEmptyTitle => 'Music is taking a quick break';
+
+  @override
+  String get musicEmptySubtitle =>
+      'We couldn\'t load the latest tracks. Please try again.';
+
+  @override
+  String get tryAgain => 'Try again';
 }

@@ -9,12 +9,12 @@ import android.os.BatteryManager
 import android.os.Build
 import android.os.StatFs
 import android.util.DisplayMetrics
-import io.flutter.embedding.android.FlutterActivity
+import com.ryanheise.audioservice.AudioServiceActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 import java.util.Locale
 
-class MainActivity : FlutterActivity() {
+class MainActivity : AudioServiceActivity() {
     private val channelName = "com.shawky.structure/device_info"
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {

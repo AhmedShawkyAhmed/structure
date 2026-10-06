@@ -109,6 +109,36 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'إنجليزي'**
   String get english;
+
+  /// No description provided for @musicHeroTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'موسيقى لكل لحظة'**
+  String get musicHeroTitle;
+
+  /// No description provided for @musicHeroSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتشف أحدث الأغاني واستمتع بمقاطع مدتها 30 ثانية.'**
+  String get musicHeroSubtitle;
+
+  /// No description provided for @musicEmptyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الموسيقى تأخذ استراحة قصيرة'**
+  String get musicEmptyTitle;
+
+  /// No description provided for @musicEmptySubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر تحميل أحدث الأغاني. حاول مرة أخرى.'**
+  String get musicEmptySubtitle;
+
+  /// No description provided for @tryAgain.
+  ///
+  /// In ar, this message translates to:
+  /// **'حاول مرة أخرى'**
+  String get tryAgain;
 }
 
 class _AppLocalizationsDelegate

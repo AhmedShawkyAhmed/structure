@@ -4,6 +4,7 @@ import 'package:navigation_service/navigation_service.dart';
 import 'package:structure/core/helpers/localization_helper.dart';
 import 'package:structure/core/routing/app_router.dart';
 import 'package:structure/features/localization/generated/app_localizations.dart';
+import 'package:twist_music_player/twist_music_player.dart';
 
 import 'app_builder.dart';
 
@@ -34,7 +35,10 @@ class _MyAppState extends State<MyApp> {
       builder: (context, locale, child) {
         return MaterialApp(
           builder: defaultAppBuilder,
-          localizationsDelegates: AppLocalizations.localizationsDelegates,
+          localizationsDelegates: const [
+            ...AppLocalizations.localizationsDelegates,
+            TwistMusicLocalizations.delegate,
+          ],
           localeResolutionCallback: (locale, supportedLocales) {
             for (var supportedLocale in supportedLocales) {
               if (supportedLocale.languageCode == locale?.languageCode &&
@@ -51,11 +55,18 @@ class _MyAppState extends State<MyApp> {
           onGenerateRoute: routes.onGenerateRoute,
           initialRoute: '/',
           theme: ThemeData(
-            fontFamily: LocalizationHelper.isArabic
+            fontFamily: locale.languageCode == Languages.ar.name
                 ? 'Cairo'
                 : 'CenturyGothicPaneuropean',
             colorSchemeSeed: const Color(0xff7210FF),
             useMaterial3: true,
+            extensions: const [
+              TwistMusicTheme(
+                promptAccent: Color(0xFF7C5CFC),
+                miniPlayerBackground: Color(0xF2FFFFFF),
+                miniPlayerForeground: Color(0xFF151A2D),
+              ),
+            ],
           ),
           title: 'Structure',
         );

@@ -4,7 +4,7 @@ import 'package:structure/core/routing/app_routes.dart';
 import 'package:structure/features/auth/ui/screens/login_screen.dart';
 import 'package:structure/features/auth/ui/screens/register_screen.dart';
 import 'package:structure/features/device_info/ui/screens/device_diagnostics_screen.dart';
-import 'package:structure/features/home/ui/screens/home_screen.dart';
+import 'package:structure/features/home/ui/views/home_view.dart';
 import 'package:structure/features/on_boarding/ui/screens/on_boarding_screen.dart';
 import 'package:structure/features/shared/ui/screens/un_known_screen.dart';
 import 'package:structure/features/splash/ui/screens/splash_screen.dart';
@@ -12,7 +12,7 @@ import 'package:structure/features/splash/ui/screens/splash_screen.dart';
 class AppRouter {
   Route<dynamic> onGenerateRoute(RouteSettings settings) {
     final String routeName = settings.name == '/'
-        ? AppRoutes.deviceInfo.path
+        ? AppRoutes.home.path
         : settings.name ?? '';
 
     final AppRoutes navigatedRoute =
@@ -35,7 +35,7 @@ class AppRouter {
       case AppRoutes.login:
         return RouteTransition.fade(page: const LoginScreen());
       case AppRoutes.home:
-        return RouteTransition.fade(page: const HomeScreen());
+        return RouteTransition.fade(page: const HomeView());
     }
   }
 }

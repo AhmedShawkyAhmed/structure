@@ -13,4 +13,20 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get english => 'إنجليزي';
+
+  @override
+  String get musicHeroTitle => 'موسيقى لكل لحظة';
+
+  @override
+  String get musicHeroSubtitle =>
+      'اكتشف أحدث الأغاني واستمتع بمقاطع مدتها 30 ثانية.';
+
+  @override
+  String get musicEmptyTitle => 'الموسيقى تأخذ استراحة قصيرة';
+
+  @override
+  String get musicEmptySubtitle => 'تعذر تحميل أحدث الأغاني. حاول مرة أخرى.';
+
+  @override
+  String get tryAgain => 'حاول مرة أخرى';
 }

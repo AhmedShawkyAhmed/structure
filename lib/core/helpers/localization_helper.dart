@@ -13,11 +13,10 @@ class LocalizationHelper {
 
   static final ValueNotifier<Locale> localeNotifier = ValueNotifier<Locale>(
     Locale(
-      //     DatabaseHelper.getItem(
-      //   boxName: DatabaseBox.appBox,
-      //   key: DatabaseKey.language,
-      // ) ??
-      Languages.en.name,
+      WidgetsBinding.instance.platformDispatcher.locale.languageCode ==
+              Languages.ar.name
+          ? Languages.ar.name
+          : Languages.en.name,
     ),
   );
 

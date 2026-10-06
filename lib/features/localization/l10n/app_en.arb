@@ -1,4 +1,9 @@
 {
   "arabic": "Arabic",
-  "english": "English"
+  "english": "English",
+  "musicHeroTitle": "Music for every moment",
+  "musicHeroSubtitle": "Discover new tracks and enjoy 30-second previews.",
+  "musicEmptyTitle": "Music is taking a quick break",
+  "musicEmptySubtitle": "We couldn't load the latest tracks. Please try again.",
+  "tryAgain": "Try again"
 }
