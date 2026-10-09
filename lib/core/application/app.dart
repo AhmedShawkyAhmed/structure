@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:navigation_service/navigation_service.dart';
 import 'package:structure/core/di/service_locator.dart';
 import 'package:structure/core/helpers/localization_helper.dart';
+import 'package:structure/core/resources/app_theme.dart';
 import 'package:structure/core/routing/app_router.dart';
 import 'package:structure/features/issue_reporting/data/issue_reporting_controller.dart';
 import 'package:structure/features/localization/generated/app_localizations.dart';
@@ -59,20 +60,7 @@ class _MyAppState extends State<MyApp> {
           debugShowCheckedModeBanner: false,
           onGenerateRoute: routes.onGenerateRoute,
           initialRoute: '/',
-          theme: ThemeData(
-            fontFamily: locale.languageCode == Languages.ar.name
-                ? 'Cairo'
-                : 'CenturyGothicPaneuropean',
-            colorSchemeSeed: const Color(0xff7210FF),
-            useMaterial3: true,
-            extensions: const [
-              TwistMusicTheme(
-                promptAccent: Color(0xFF7C5CFC),
-                miniPlayerBackground: Color(0xF2FFFFFF),
-                miniPlayerForeground: Color(0xFF151A2D),
-              ),
-            ],
-          ),
+          theme: AppTheme.light,
           title: 'Structure',
         );
       },

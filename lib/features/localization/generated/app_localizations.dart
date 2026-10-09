@@ -565,6 +565,234 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'الشاشة التي حدثت فيها المشكلة'**
   String get reportScreen;
+
+  /// No description provided for @workspaceEyebrow.
+  ///
+  /// In ar, this message translates to:
+  /// **'مساحتك اليومية'**
+  String get workspaceEyebrow;
+
+  /// No description provided for @exploreFeatures.
+  ///
+  /// In ar, this message translates to:
+  /// **'استكشف مساحتك'**
+  String get exploreFeatures;
+
+  /// No description provided for @openMusic.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتشف الموسيقى'**
+  String get openMusic;
+
+  /// No description provided for @quickReportTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل واجهت مشكلة؟'**
+  String get quickReportTitle;
+
+  /// No description provided for @quickReportSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هزة سريعة تبدأ تقريراً.'**
+  String get quickReportSubtitle;
+
+  /// No description provided for @welcomeBack.
+  ///
+  /// In ar, this message translates to:
+  /// **'مرحباً بعودتك'**
+  String get welcomeBack;
+
+  /// No description provided for @loginSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'سجّل دخولك وتابع من حيث توقفت.'**
+  String get loginSubtitle;
+
+  /// No description provided for @emailLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'البريد الإلكتروني'**
+  String get emailLabel;
+
+  /// No description provided for @passwordLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمة المرور'**
+  String get passwordLabel;
+
+  /// No description provided for @firstNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'الاسم الأول'**
+  String get firstNameLabel;
+
+  /// No description provided for @lastNameLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'اسم العائلة'**
+  String get lastNameLabel;
+
+  /// No description provided for @phoneLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'رقم الهاتف'**
+  String get phoneLabel;
+
+  /// No description provided for @confirmPasswordLabel.
+  ///
+  /// In ar, this message translates to:
+  /// **'تأكيد كلمة المرور'**
+  String get confirmPasswordLabel;
+
+  /// No description provided for @createAccountTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مساحتك بانتظارك'**
+  String get createAccountTitle;
+
+  /// No description provided for @createAccountSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنشئ حسابك للبدء.'**
+  String get createAccountSubtitle;
+
+  /// No description provided for @noAccount.
+  ///
+  /// In ar, this message translates to:
+  /// **'جديد هنا؟'**
+  String get noAccount;
+
+  /// No description provided for @haveAccount.
+  ///
+  /// In ar, this message translates to:
+  /// **'لديك حساب بالفعل؟'**
+  String get haveAccount;
+
+  /// No description provided for @showPassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'إظهار كلمة المرور'**
+  String get showPassword;
+
+  /// No description provided for @hidePassword.
+  ///
+  /// In ar, this message translates to:
+  /// **'إخفاء كلمة المرور'**
+  String get hidePassword;
+
+  /// No description provided for @emailRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'أدخل بريداً إلكترونياً صحيحاً.'**
+  String get emailRequired;
+
+  /// No description provided for @fieldRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجى إكمال هذا الحقل.'**
+  String get fieldRequired;
+
+  /// No description provided for @passwordMismatch.
+  ///
+  /// In ar, this message translates to:
+  /// **'كلمتا المرور غير متطابقتين.'**
+  String get passwordMismatch;
+
+  /// No description provided for @onboardingTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مساحة للأشياء التي تحبها'**
+  String get onboardingTitle;
+
+  /// No description provided for @onboardingSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتشف الموسيقى وتعرّف على جهازك وساعد في تحسين كل تجربة.'**
+  String get onboardingSubtitle;
+
+  /// No description provided for @getStarted.
+  ///
+  /// In ar, this message translates to:
+  /// **'لنبدأ الاستكشاف'**
+  String get getStarted;
+
+  /// No description provided for @reportDetailsTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخبرنا بالتفاصيل'**
+  String get reportDetailsTitle;
+
+  /// No description provided for @privacyTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أنت من يقرر'**
+  String get privacyTitle;
+
+  /// No description provided for @pageNotFound.
+  ///
+  /// In ar, this message translates to:
+  /// **'هذه الصفحة غير متاحة'**
+  String get pageNotFound;
+
+  /// No description provided for @backToHome.
+  ///
+  /// In ar, this message translates to:
+  /// **'العودة لمساحتك'**
+  String get backToHome;
+
+  /// No description provided for @deviceDiagnosticsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'نظرة أقرب إلى الجهاز بين يديك.'**
+  String get deviceDiagnosticsSubtitle;
+
+  /// No description provided for @deviceDataTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تفاصيل الجهاز'**
+  String get deviceDataTitle;
+
+  /// No description provided for @deviceFieldCount.
+  ///
+  /// In ar, this message translates to:
+  /// **'{count} حقلاً'**
+  String deviceFieldCount(int count);
+
+  /// No description provided for @selectedDeviceId.
+  ///
+  /// In ar, this message translates to:
+  /// **'معرّف الجهاز'**
+  String get selectedDeviceId;
+
+  /// No description provided for @collectingDeviceData.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ جمع البيانات…'**
+  String get collectingDeviceData;
+
+  /// No description provided for @copyDeviceData.
+  ///
+  /// In ar, this message translates to:
+  /// **'نسخ تفاصيل الجهاز'**
+  String get copyDeviceData;
+
+  /// No description provided for @deviceDataCopied.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم نسخ تفاصيل الجهاز'**
+  String get deviceDataCopied;
+
+  /// No description provided for @refreshDeviceData.
+  ///
+  /// In ar, this message translates to:
+  /// **'تحديث التفاصيل'**
+  String get refreshDeviceData;
+
+  /// No description provided for @deviceDataFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر جمع تفاصيل الجهاز'**
+  String get deviceDataFailed;
 }
 
 class _AppLocalizationsDelegate

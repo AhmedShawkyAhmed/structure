@@ -272,4 +272,122 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get reportScreen => 'Screen where the issue occurred';
+
+  @override
+  String get workspaceEyebrow => 'YOUR EVERYDAY WORKSPACE';
+
+  @override
+  String get exploreFeatures => 'Explore your space';
+
+  @override
+  String get openMusic => 'Discover music';
+
+  @override
+  String get quickReportTitle => 'Something not quite right?';
+
+  @override
+  String get quickReportSubtitle => 'A quick shake starts a report.';
+
+  @override
+  String get welcomeBack => 'Welcome back';
+
+  @override
+  String get loginSubtitle => 'Sign in and pick up where you left off.';
+
+  @override
+  String get emailLabel => 'Email address';
+
+  @override
+  String get passwordLabel => 'Password';
+
+  @override
+  String get firstNameLabel => 'First name';
+
+  @override
+  String get lastNameLabel => 'Last name';
+
+  @override
+  String get phoneLabel => 'Phone number';
+
+  @override
+  String get confirmPasswordLabel => 'Confirm password';
+
+  @override
+  String get createAccountTitle => 'Make yourself at home';
+
+  @override
+  String get createAccountSubtitle => 'Create your account to get started.';
+
+  @override
+  String get noAccount => 'New here?';
+
+  @override
+  String get haveAccount => 'Already have an account?';
+
+  @override
+  String get showPassword => 'Show password';
+
+  @override
+  String get hidePassword => 'Hide password';
+
+  @override
+  String get emailRequired => 'Enter a valid email address.';
+
+  @override
+  String get fieldRequired => 'Please complete this field.';
+
+  @override
+  String get passwordMismatch => 'Passwords do not match.';
+
+  @override
+  String get onboardingTitle => 'A space for the things you love';
+
+  @override
+  String get onboardingSubtitle =>
+      'Discover music, explore your device, and help make every experience better.';
+
+  @override
+  String get getStarted => 'Let’s explore';
+
+  @override
+  String get reportDetailsTitle => 'Tell us the details';
+
+  @override
+  String get privacyTitle => 'You’re in control';
+
+  @override
+  String get pageNotFound => 'This space is still waiting';
+
+  @override
+  String get backToHome => 'Back to your space';
+
+  @override
+  String get deviceDiagnosticsSubtitle =>
+      'A closer look at the device in your hands.';
+
+  @override
+  String get deviceDataTitle => 'Device details';
+
+  @override
+  String deviceFieldCount(int count) {
+    return '$count fields';
+  }
+
+  @override
+  String get selectedDeviceId => 'DEVICE ID';
+
+  @override
+  String get collectingDeviceData => 'Collecting…';
+
+  @override
+  String get copyDeviceData => 'Copy device details';
+
+  @override
+  String get deviceDataCopied => 'Device details copied';
+
+  @override
+  String get refreshDeviceData => 'Refresh details';
+
+  @override
+  String get deviceDataFailed => 'Could not collect device details';
 }

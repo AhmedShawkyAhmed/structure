@@ -264,4 +264,121 @@ class AppLocalizationsAr extends AppLocalizations {
 
   @override
   String get reportScreen => 'الشاشة التي حدثت فيها المشكلة';
+
+  @override
+  String get workspaceEyebrow => 'مساحتك اليومية';
+
+  @override
+  String get exploreFeatures => 'استكشف مساحتك';
+
+  @override
+  String get openMusic => 'اكتشف الموسيقى';
+
+  @override
+  String get quickReportTitle => 'هل واجهت مشكلة؟';
+
+  @override
+  String get quickReportSubtitle => 'هزة سريعة تبدأ تقريراً.';
+
+  @override
+  String get welcomeBack => 'مرحباً بعودتك';
+
+  @override
+  String get loginSubtitle => 'سجّل دخولك وتابع من حيث توقفت.';
+
+  @override
+  String get emailLabel => 'البريد الإلكتروني';
+
+  @override
+  String get passwordLabel => 'كلمة المرور';
+
+  @override
+  String get firstNameLabel => 'الاسم الأول';
+
+  @override
+  String get lastNameLabel => 'اسم العائلة';
+
+  @override
+  String get phoneLabel => 'رقم الهاتف';
+
+  @override
+  String get confirmPasswordLabel => 'تأكيد كلمة المرور';
+
+  @override
+  String get createAccountTitle => 'مساحتك بانتظارك';
+
+  @override
+  String get createAccountSubtitle => 'أنشئ حسابك للبدء.';
+
+  @override
+  String get noAccount => 'جديد هنا؟';
+
+  @override
+  String get haveAccount => 'لديك حساب بالفعل؟';
+
+  @override
+  String get showPassword => 'إظهار كلمة المرور';
+
+  @override
+  String get hidePassword => 'إخفاء كلمة المرور';
+
+  @override
+  String get emailRequired => 'أدخل بريداً إلكترونياً صحيحاً.';
+
+  @override
+  String get fieldRequired => 'يرجى إكمال هذا الحقل.';
+
+  @override
+  String get passwordMismatch => 'كلمتا المرور غير متطابقتين.';
+
+  @override
+  String get onboardingTitle => 'مساحة للأشياء التي تحبها';
+
+  @override
+  String get onboardingSubtitle =>
+      'اكتشف الموسيقى وتعرّف على جهازك وساعد في تحسين كل تجربة.';
+
+  @override
+  String get getStarted => 'لنبدأ الاستكشاف';
+
+  @override
+  String get reportDetailsTitle => 'أخبرنا بالتفاصيل';
+
+  @override
+  String get privacyTitle => 'أنت من يقرر';
+
+  @override
+  String get pageNotFound => 'هذه الصفحة غير متاحة';
+
+  @override
+  String get backToHome => 'العودة لمساحتك';
+
+  @override
+  String get deviceDiagnosticsSubtitle => 'نظرة أقرب إلى الجهاز بين يديك.';
+
+  @override
+  String get deviceDataTitle => 'تفاصيل الجهاز';
+
+  @override
+  String deviceFieldCount(int count) {
+    return '$count حقلاً';
+  }
+
+  @override
+  String get selectedDeviceId => 'معرّف الجهاز';
+
+  @override
+  String get collectingDeviceData => 'جارٍ جمع البيانات…';
+
+  @override
+  String get copyDeviceData => 'نسخ تفاصيل الجهاز';
+
+  @override
+  String get deviceDataCopied => 'تم نسخ تفاصيل الجهاز';
+
+  @override
+  String get refreshDeviceData => 'تحديث التفاصيل';
+
+  @override
+  String get deviceDataFailed => 'تعذر جمع تفاصيل الجهاز';
 }

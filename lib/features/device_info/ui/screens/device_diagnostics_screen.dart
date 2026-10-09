@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:structure/core/resources/app_theme.dart';
+import 'package:structure/core/shared/widgets/app_ui.dart';
 import 'package:structure/features/device_info/data/device_diagnostics_service.dart';
+import 'package:structure/features/localization/generated/app_localizations.dart';
+import 'package:twist_music_player/twist_music_player.dart';
 
 class DeviceDiagnosticsScreen extends StatefulWidget {
   const DeviceDiagnosticsScreen({super.key});
@@ -64,86 +68,99 @@ class _DeviceDiagnosticsScreenState extends State<DeviceDiagnosticsScreen> {
     if (!mounted) {
       return;
     }
-    ScaffoldMessenger.of(
-      context,
-    ).showSnackBar(const SnackBar(content: Text('Device data copied as JSON')));
+    ScaffoldMessenger.of(context).showSnackBar(
+      SnackBar(content: Text(AppLocalizations.of(context).deviceDataCopied)),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
-    const Color ink = Color(0xff17212F);
-    const Color canvas = Color(0xffF4F7F8);
+    final l = AppLocalizations.of(context);
     return Scaffold(
-      backgroundColor: canvas,
-      body: SafeArea(
-        child: RefreshIndicator(
-          onRefresh: _load,
-          color: const Color(0xff007C78),
-          child: CustomScrollView(
-            physics: const AlwaysScrollableScrollPhysics(),
-            slivers: <Widget>[
-              SliverToBoxAdapter(
-                child: _Header(
-                  marker: _selectedDeviceId,
-                  isLoading: _isLoading,
-                  onRefresh: _load,
-                  onCopy: _copyJson,
+      appBar: AppBar(
+        title: Text(l.deviceFeatureTitle),
+        actions: [
+          IconButton(
+            tooltip: l.refreshDeviceData,
+            onPressed: _isLoading ? null : _load,
+            icon: const Icon(Icons.refresh_rounded),
+          ),
+          const SizedBox(width: 12),
+        ],
+      ),
+      body: Align(
+        alignment: Alignment.topCenter,
+        child: ConstrainedBox(
+          constraints: const BoxConstraints(maxWidth: 900),
+          child: RefreshIndicator(
+            onRefresh: _load,
+            color: const Color(0xff007C78),
+            child: CustomScrollView(
+              physics: const AlwaysScrollableScrollPhysics(),
+              slivers: <Widget>[
+                SliverToBoxAdapter(
+                  child: _Header(marker: _selectedDeviceId, onCopy: _copyJson),
                 ),
-              ),
-              if (_error != null)
-                SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: _ErrorState(error: _error!, onRetry: _load),
-                )
-              else if (_snapshot == null)
-                const SliverFillRemaining(
-                  hasScrollBody: false,
-                  child: Center(child: CircularProgressIndicator()),
-                )
-              else ...<Widget>[
-                SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(20, 22, 20, 12),
-                  sliver: SliverToBoxAdapter(
-                    child: Row(
-                      children: <Widget>[
-                        Text(
-                          'AVAILABLE DATA',
-                          style: Theme.of(context).textTheme.labelLarge
-                              ?.copyWith(
-                                color: ink.withValues(alpha: 0.58),
-                                fontWeight: FontWeight.w800,
-                                letterSpacing: 1.4,
-                              ),
-                        ),
-                        const Spacer(),
-                        Text(
-                          '$_fieldCount fields',
-                          style: Theme.of(context).textTheme.bodySmall
-                              ?.copyWith(color: ink.withValues(alpha: 0.52)),
-                        ),
-                      ],
+                if (_error != null)
+                  SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: _ErrorState(error: _error!, onRetry: _load),
+                  )
+                else if (_snapshot == null)
+                  const SliverFillRemaining(
+                    hasScrollBody: false,
+                    child: Center(child: CircularProgressIndicator()),
+                  )
+                else ...<Widget>[
+                  SliverPadding(
+                    padding: const EdgeInsets.fromLTRB(20, 22, 20, 12),
+                    sliver: SliverToBoxAdapter(
+                      child: Row(
+                        children: <Widget>[
+                          Text(
+                            l.deviceDataTitle,
+                            style: Theme.of(context).textTheme.labelLarge
+                                ?.copyWith(
+                                  color: AppTheme.ink,
+                                  fontWeight: FontWeight.w800,
+                                  letterSpacing: 1.4,
+                                ),
+                          ),
+                          const Spacer(),
+                          Text(
+                            l.deviceFieldCount(_fieldCount),
+                            style: Theme.of(context).textTheme.bodySmall
+                                ?.copyWith(color: AppTheme.muted),
+                          ),
+                        ],
+                      ),
                     ),
                   ),
-                ),
-                SliverPadding(
-                  padding: const EdgeInsets.fromLTRB(16, 0, 16, 36),
-                  sliver: SliverList.separated(
-                    itemCount: _snapshot!.sections.length,
-                    separatorBuilder: (BuildContext context, int index) =>
-                        const SizedBox(height: 12),
-                    itemBuilder: (BuildContext context, int index) {
-                      final MapEntry<String, Map<String, Object?>> section =
-                          _snapshot!.sections.entries.elementAt(index);
-                      return _DataCard(
-                        title: section.key,
-                        values: section.value,
-                        icon: _iconFor(section.key),
-                      );
-                    },
+                  SliverPadding(
+                    padding: EdgeInsets.fromLTRB(
+                      24,
+                      0,
+                      24,
+                      TwistPlayerHost.bottomPaddingOf(context) + 36,
+                    ),
+                    sliver: SliverList.separated(
+                      itemCount: _snapshot!.sections.length,
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 12),
+                      itemBuilder: (BuildContext context, int index) {
+                        final MapEntry<String, Map<String, Object?>> section =
+                            _snapshot!.sections.entries.elementAt(index);
+                        return _DataCard(
+                          title: section.key,
+                          values: section.value,
+                          icon: _iconFor(section.key),
+                        );
+                      },
+                    ),
                   ),
-                ),
+                ],
               ],
-            ],
+            ),
           ),
         ),
       ),
@@ -177,130 +194,63 @@ class _DeviceDiagnosticsScreenState extends State<DeviceDiagnosticsScreen> {
 }
 
 class _Header extends StatelessWidget {
-  const _Header({
-    required this.marker,
-    required this.isLoading,
-    required this.onRefresh,
-    required this.onCopy,
-  });
-
+  const _Header({required this.marker, required this.onCopy});
   final String? marker;
-  final bool isLoading;
-  final VoidCallback onRefresh;
   final VoidCallback onCopy;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.fromLTRB(20, 20, 20, 24),
-      decoration: const BoxDecoration(
-        color: Color(0xff17212F),
-        borderRadius: BorderRadius.vertical(bottom: Radius.circular(30)),
-      ),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: <Widget>[
-          Row(
-            children: <Widget>[
-              if (Navigator.canPop(context))
-                const BackButton(color: Colors.white),
-              Container(
-                width: 44,
-                height: 44,
-                decoration: BoxDecoration(
-                  color: const Color(0xff65D6CC).withValues(alpha: 0.14),
-                  borderRadius: BorderRadius.circular(14),
-                ),
-                child: const Icon(
-                  Icons.phonelink_setup_rounded,
-                  color: Color(0xff65D6CC),
+    final l = AppLocalizations.of(context);
+    return Padding(
+      padding: const EdgeInsets.fromLTRB(24, 20, 24, 0),
+      child: AppHeroCard(
+        title: l.deviceFeatureTitle,
+        subtitle: l.deviceDiagnosticsSubtitle,
+        icon: Icons.phonelink_setup_rounded,
+        footer: Container(
+          padding: const EdgeInsets.all(16),
+          decoration: BoxDecoration(
+            color: Colors.white.withValues(alpha: .08),
+            borderRadius: BorderRadius.circular(18),
+          ),
+          child: Row(
+            children: [
+              const Icon(Icons.fingerprint_rounded, color: Color(0xFFD2C6FF)),
+              const SizedBox(width: 12),
+              Expanded(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.selectedDeviceId,
+                      style: const TextStyle(
+                        color: Color(0xFFD2C6FF),
+                        fontSize: 10,
+                        fontWeight: FontWeight.w700,
+                        letterSpacing: 1,
+                      ),
+                    ),
+                    const SizedBox(height: 6),
+                    SelectableText(
+                      marker ?? l.collectingDeviceData,
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontFamily: 'monospace',
+                        fontSize: 12,
+                      ),
+                    ),
+                  ],
                 ),
               ),
-              const Spacer(),
-              IconButton.filledTonal(
-                tooltip: 'Refresh data',
-                onPressed: isLoading ? null : onRefresh,
-                style: IconButton.styleFrom(
-                  foregroundColor: Colors.white,
-                  backgroundColor: Colors.white.withValues(alpha: 0.08),
-                ),
-                icon: isLoading
-                    ? const SizedBox.square(
-                        dimension: 18,
-                        child: CircularProgressIndicator(
-                          strokeWidth: 2,
-                          color: Colors.white,
-                        ),
-                      )
-                    : const Icon(Icons.refresh_rounded),
+              IconButton(
+                tooltip: l.copyDeviceData,
+                onPressed: marker == null ? null : onCopy,
+                color: Colors.white,
+                icon: const Icon(Icons.copy_rounded, size: 20),
               ),
             ],
           ),
-          const SizedBox(height: 24),
-          Text(
-            'Device diagnostics',
-            style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-              color: Colors.white,
-              fontWeight: FontWeight.w800,
-              letterSpacing: -0.7,
-            ),
-          ),
-          const SizedBox(height: 7),
-          Text(
-            'Permission-free information exposed by this device',
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Colors.white.withValues(alpha: 0.62),
-            ),
-          ),
-          const SizedBox(height: 22),
-          Container(
-            width: double.infinity,
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              gradient: const LinearGradient(
-                colors: <Color>[Color(0xff087E78), Color(0xff12675F)],
-              ),
-              borderRadius: BorderRadius.circular(20),
-            ),
-            child: Row(
-              children: <Widget>[
-                const Icon(Icons.verified_user_outlined, color: Colors.white),
-                const SizedBox(width: 12),
-                Expanded(
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: <Widget>[
-                      Text(
-                        'SELECTED DEVICE ID',
-                        style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                          color: Colors.white.withValues(alpha: 0.7),
-                          fontWeight: FontWeight.w800,
-                          letterSpacing: 1.2,
-                        ),
-                      ),
-                      const SizedBox(height: 5),
-                      SelectableText(
-                        marker ?? 'Collecting…',
-                        maxLines: 2,
-                        style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-                          color: Colors.white,
-                          fontFamily: 'monospace',
-                          fontWeight: FontWeight.w700,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                IconButton(
-                  tooltip: 'Copy all data as JSON',
-                  onPressed: marker == null ? null : onCopy,
-                  color: Colors.white,
-                  icon: const Icon(Icons.copy_all_rounded),
-                ),
-              ],
-            ),
-          ),
-        ],
+        ),
       ),
     );
   }
@@ -323,7 +273,7 @@ class _DataCard extends StatelessWidget {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: const Color(0xffE5EAEC)),
+        border: Border.all(color: AppTheme.line),
         boxShadow: const <BoxShadow>[
           BoxShadow(
             color: Color(0x09000000),
@@ -342,26 +292,25 @@ class _DataCard extends StatelessWidget {
                   width: 38,
                   height: 38,
                   decoration: BoxDecoration(
-                    color: const Color(0xffE8F5F3),
+                    color: AppTheme.lavender,
                     borderRadius: BorderRadius.circular(12),
                   ),
-                  child: Icon(icon, size: 20, color: const Color(0xff087E78)),
+                  child: Icon(icon, size: 20, color: AppTheme.violet),
                 ),
                 const SizedBox(width: 12),
                 Expanded(
                   child: Text(
                     title,
                     style: Theme.of(context).textTheme.titleMedium?.copyWith(
-                      color: const Color(0xff17212F),
+                      color: AppTheme.ink,
                       fontWeight: FontWeight.w800,
                     ),
                   ),
                 ),
                 Text(
                   '${values.length}',
-                  style: Theme.of(context).textTheme.labelMedium?.copyWith(
-                    color: const Color(0xff8B959E),
-                  ),
+                  style: Theme.of(context).textTheme.labelMedium
+                      ?.copyWith(color: AppTheme.muted),
                 ),
               ],
             ),
@@ -406,7 +355,7 @@ class _DataRow extends StatelessWidget {
             child: Text(
               _readable(label),
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: const Color(0xff7D8790),
+                color: AppTheme.muted,
                 fontWeight: FontWeight.w600,
               ),
             ),
@@ -418,7 +367,7 @@ class _DataRow extends StatelessWidget {
               value,
               textAlign: TextAlign.end,
               style: Theme.of(context).textTheme.bodySmall?.copyWith(
-                color: const Color(0xff26323E),
+                color: AppTheme.ink,
                 fontWeight: FontWeight.w700,
                 height: 1.4,
               ),
@@ -460,7 +409,7 @@ class _ErrorState extends StatelessWidget {
           const Icon(Icons.error_outline_rounded, size: 48),
           const SizedBox(height: 12),
           Text(
-            'Could not collect device data',
+            AppLocalizations.of(context).deviceDataFailed,
             style: Theme.of(context).textTheme.titleMedium,
           ),
           const SizedBox(height: 8),
@@ -469,7 +418,7 @@ class _ErrorState extends StatelessWidget {
           FilledButton.icon(
             onPressed: onRetry,
             icon: const Icon(Icons.refresh_rounded),
-            label: const Text('Try again'),
+            label: Text(AppLocalizations.of(context).tryAgain),
           ),
         ],
       ),

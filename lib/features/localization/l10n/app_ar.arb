@@ -76,5 +76,50 @@
   "reportCancelled": "تم إلغاء الرفع والاحتفاظ بالمسودة. قد يكون الخادم استلم التقرير بالفعل؛ إعادة المحاولة تستخدم نفس معرّفه.",
   "shakeSettingFailed": "تعذر حفظ إعداد الهز. حاول مرة أخرى.",
   "videoPreviewFailed": "تعذرت معاينة الفيديو.",
-  "reportScreen": "الشاشة التي حدثت فيها المشكلة"
+  "reportScreen": "الشاشة التي حدثت فيها المشكلة",
+  "workspaceEyebrow": "مساحتك اليومية",
+  "exploreFeatures": "استكشف مساحتك",
+  "openMusic": "اكتشف الموسيقى",
+  "quickReportTitle": "هل واجهت مشكلة؟",
+  "quickReportSubtitle": "هزة سريعة تبدأ تقريراً.",
+  "welcomeBack": "مرحباً بعودتك",
+  "loginSubtitle": "سجّل دخولك وتابع من حيث توقفت.",
+  "emailLabel": "البريد الإلكتروني",
+  "passwordLabel": "كلمة المرور",
+  "firstNameLabel": "الاسم الأول",
+  "lastNameLabel": "اسم العائلة",
+  "phoneLabel": "رقم الهاتف",
+  "confirmPasswordLabel": "تأكيد كلمة المرور",
+  "createAccountTitle": "مساحتك بانتظارك",
+  "createAccountSubtitle": "أنشئ حسابك للبدء.",
+  "noAccount": "جديد هنا؟",
+  "haveAccount": "لديك حساب بالفعل؟",
+  "showPassword": "إظهار كلمة المرور",
+  "hidePassword": "إخفاء كلمة المرور",
+  "emailRequired": "أدخل بريداً إلكترونياً صحيحاً.",
+  "fieldRequired": "يرجى إكمال هذا الحقل.",
+  "passwordMismatch": "كلمتا المرور غير متطابقتين.",
+  "onboardingTitle": "مساحة للأشياء التي تحبها",
+  "onboardingSubtitle": "اكتشف الموسيقى وتعرّف على جهازك وساعد في تحسين كل تجربة.",
+  "getStarted": "لنبدأ الاستكشاف",
+  "reportDetailsTitle": "أخبرنا بالتفاصيل",
+  "privacyTitle": "أنت من يقرر",
+  "pageNotFound": "هذه الصفحة غير متاحة",
+  "backToHome": "العودة لمساحتك",
+  "deviceDiagnosticsSubtitle": "نظرة أقرب إلى الجهاز بين يديك.",
+  "deviceDataTitle": "تفاصيل الجهاز",
+  "deviceFieldCount": "{count} حقلاً",
+  "selectedDeviceId": "معرّف الجهاز",
+  "collectingDeviceData": "جارٍ جمع البيانات…",
+  "copyDeviceData": "نسخ تفاصيل الجهاز",
+  "deviceDataCopied": "تم نسخ تفاصيل الجهاز",
+  "refreshDeviceData": "تحديث التفاصيل",
+  "deviceDataFailed": "تعذر جمع تفاصيل الجهاز",
+  "@deviceFieldCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

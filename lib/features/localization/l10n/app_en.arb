@@ -76,5 +76,50 @@
   "reportCancelled": "Upload cancelled. Your draft is kept. The server may already have received it; retrying uses the same report ID.",
   "shakeSettingFailed": "Could not save your shake preference. Please try again.",
   "videoPreviewFailed": "Could not preview this video.",
-  "reportScreen": "Screen where the issue occurred"
+  "reportScreen": "Screen where the issue occurred",
+  "workspaceEyebrow": "YOUR EVERYDAY WORKSPACE",
+  "exploreFeatures": "Explore your space",
+  "openMusic": "Discover music",
+  "quickReportTitle": "Something not quite right?",
+  "quickReportSubtitle": "A quick shake starts a report.",
+  "welcomeBack": "Welcome back",
+  "loginSubtitle": "Sign in and pick up where you left off.",
+  "emailLabel": "Email address",
+  "passwordLabel": "Password",
+  "firstNameLabel": "First name",
+  "lastNameLabel": "Last name",
+  "phoneLabel": "Phone number",
+  "confirmPasswordLabel": "Confirm password",
+  "createAccountTitle": "Make yourself at home",
+  "createAccountSubtitle": "Create your account to get started.",
+  "noAccount": "New here?",
+  "haveAccount": "Already have an account?",
+  "showPassword": "Show password",
+  "hidePassword": "Hide password",
+  "emailRequired": "Enter a valid email address.",
+  "fieldRequired": "Please complete this field.",
+  "passwordMismatch": "Passwords do not match.",
+  "onboardingTitle": "A space for the things you love",
+  "onboardingSubtitle": "Discover music, explore your device, and help make every experience better.",
+  "getStarted": "Let’s explore",
+  "reportDetailsTitle": "Tell us the details",
+  "privacyTitle": "You’re in control",
+  "pageNotFound": "This space is still waiting",
+  "backToHome": "Back to your space",
+  "deviceDiagnosticsSubtitle": "A closer look at the device in your hands.",
+  "deviceDataTitle": "Device details",
+  "deviceFieldCount": "{count} fields",
+  "selectedDeviceId": "DEVICE ID",
+  "collectingDeviceData": "Collecting…",
+  "copyDeviceData": "Copy device details",
+  "deviceDataCopied": "Device details copied",
+  "refreshDeviceData": "Refresh details",
+  "deviceDataFailed": "Could not collect device details",
+  "@deviceFieldCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  }
 }

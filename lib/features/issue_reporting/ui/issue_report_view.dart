@@ -3,9 +3,10 @@ import 'dart:io';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:twist_music_player/twist_music_player.dart';
 
 import '../../../core/di/service_locator.dart';
+import '../../../core/resources/app_theme.dart';
+import '../../../core/shared/widgets/app_ui.dart';
 import '../../localization/generated/app_localizations.dart';
 import '../cubit/issue_report_cubit.dart';
 import '../data/issue_draft_store.dart';
@@ -120,9 +121,9 @@ class _ReportFormState extends State<_ReportForm> {
               child: Column(
                 mainAxisSize: MainAxisSize.min,
                 children: [
-                  const Icon(
-                    Icons.check_circle_rounded,
-                    size: 72,
+                  const AppIconBadge(
+                    icon: Icons.check_rounded,
+                    size: 88,
                     color: Color(0xff087E78),
                   ),
                   const SizedBox(height: 20),
@@ -155,7 +156,6 @@ class _ReportFormState extends State<_ReportForm> {
       return PopScope(
         canPop: !state.sending && !state.preparing,
         child: Scaffold(
-          backgroundColor: const Color(0xffF7F8FC),
           appBar: AppBar(
             title: Text(l.reportIssue),
             actions: [
@@ -166,25 +166,19 @@ class _ReportFormState extends State<_ReportForm> {
               ),
             ],
           ),
-          body: ListView(
-            padding: EdgeInsets.fromLTRB(
-              20,
-              16,
-              20,
-              TwistPlayerHost.bottomPaddingOf(context) + 32,
-            ),
+          body: AppPageBody(
             children: [
-              Text(
-                l.reportDraftNotice,
-                style: Theme.of(context).textTheme.bodySmall,
+              AppNotice(
+                text: l.reportDraftNotice,
+                icon: Icons.lock_outline_rounded,
               ),
               const SizedBox(height: 16),
               if (cubit.simulated) ...[
-                _Notice(text: l.reportSimulationNotice),
+                AppNotice(text: l.reportSimulationNotice),
                 const SizedBox(height: 16),
               ],
               if (!cubit.configured) ...[
-                _Notice(text: l.uploadNotConfigured),
+                AppNotice(text: l.uploadNotConfigured),
                 const SizedBox(height: 16),
               ],
               Text(
@@ -192,161 +186,204 @@ class _ReportFormState extends State<_ReportForm> {
                 style: Theme.of(context).textTheme.bodySmall,
               ),
               const SizedBox(height: 20),
-              TextField(
-                key: const Key('report_description'),
-                controller: _description,
-                enabled: editable,
-                maxLength: 4000,
-                minLines: 4,
-                maxLines: 8,
-                decoration: InputDecoration(
-                  labelText: l.reportDescription,
-                  hintText: l.reportDescriptionHint,
-                  border: const OutlineInputBorder(),
-                  alignLabelWithHint: true,
+              AppSectionCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.reportDetailsTitle,
+                      style: Theme.of(context).textTheme.titleLarge,
+                    ),
+                    const SizedBox(height: 22),
+                    TextField(
+                      key: const Key('report_description'),
+                      controller: _description,
+                      enabled: editable,
+                      maxLength: 4000,
+                      minLines: 4,
+                      maxLines: 8,
+                      decoration: InputDecoration(
+                        labelText: l.reportDescription,
+                        hintText: l.reportDescriptionHint,
+                        alignLabelWithHint: true,
+                      ),
+                      onChanged: cubit.descriptionChanged,
+                    ),
+                    const SizedBox(height: 16),
+                    TextField(
+                      key: const Key('report_expected'),
+                      controller: _expected,
+                      enabled: editable,
+                      maxLength: 2000,
+                      minLines: 2,
+                      maxLines: 4,
+                      decoration: InputDecoration(
+                        labelText: l.reportExpected,
+                        hintText: l.reportExpectedHint,
+                        alignLabelWithHint: true,
+                      ),
+                      onChanged: cubit.expectedChanged,
+                    ),
+                  ],
                 ),
-                onChanged: cubit.descriptionChanged,
               ),
               const SizedBox(height: 16),
-              TextField(
-                key: const Key('report_expected'),
-                controller: _expected,
-                enabled: editable,
-                maxLength: 2000,
-                minLines: 2,
-                maxLines: 4,
-                decoration: InputDecoration(
-                  labelText: l.reportExpected,
-                  hintText: l.reportExpectedHint,
-                  border: const OutlineInputBorder(),
-                  alignLabelWithHint: true,
-                ),
-                onChanged: cubit.expectedChanged,
-              ),
-              const SizedBox(height: 24),
-              Text(
-                l.reportAttachments,
-                style: Theme.of(context).textTheme.titleMedium,
-              ),
-              const SizedBox(height: 8),
-              Text(
-                l.reportMediaLimits,
-                style: Theme.of(context).textTheme.bodySmall,
-              ),
-              const SizedBox(height: 12),
-              Wrap(
-                spacing: 10,
-                runSpacing: 10,
-                children: [
-                  OutlinedButton.icon(
-                    onPressed:
-                        editable &&
-                            state.attachments
-                                    .where(
-                                      (a) => a.kind == AttachmentKind.image,
-                                    )
-                                    .length <
-                                ReportMediaService.maxImages
-                        ? cubit.addImages
-                        : null,
-                    icon: const Icon(Icons.add_photo_alternate_outlined),
-                    label: Text(l.addScreenshots),
-                  ),
-                  OutlinedButton.icon(
-                    onPressed:
-                        editable &&
-                            !state.attachments.any(
-                              (a) => a.kind == AttachmentKind.video,
-                            )
-                        ? cubit.addVideo
-                        : null,
-                    icon: const Icon(Icons.video_library_outlined),
-                    label: Text(l.addVideo),
-                  ),
-                ],
-              ),
-              for (final attachment in state.attachments)
-                Card(
-                  margin: const EdgeInsets.only(top: 12),
-                  child: ListTile(
-                    onTap: editable
-                        ? () => Navigator.push(
-                            context,
-                            MaterialPageRoute<void>(
-                              builder: (_) =>
-                                  AttachmentPreview(attachment: attachment),
-                            ),
-                          )
-                        : null,
-                    leading: attachment.kind == AttachmentKind.image
-                        ? ClipRRect(
-                            borderRadius: BorderRadius.circular(8),
-                            child: Image.file(
-                              File(attachment.path),
-                              width: 56,
-                              height: 56,
-                              fit: BoxFit.cover,
-                              errorBuilder: (_, error, stack) =>
-                                  const Icon(Icons.broken_image_outlined),
-                            ),
-                          )
-                        : const Icon(
-                            Icons.play_circle_outline_rounded,
-                            size: 40,
+              AppSectionCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.reportAttachments,
+                      style: Theme.of(context).textTheme.titleMedium,
+                    ),
+                    const SizedBox(height: 8),
+                    Text(
+                      l.reportMediaLimits,
+                      style: Theme.of(context).textTheme.bodySmall,
+                    ),
+                    const SizedBox(height: 12),
+                    Wrap(
+                      spacing: 10,
+                      runSpacing: 10,
+                      children: [
+                        OutlinedButton.icon(
+                          onPressed:
+                              editable &&
+                                  state.attachments
+                                          .where(
+                                            (a) =>
+                                                a.kind == AttachmentKind.image,
+                                          )
+                                          .length <
+                                      ReportMediaService.maxImages
+                              ? cubit.addImages
+                              : null,
+                          icon: const Icon(Icons.add_photo_alternate_outlined),
+                          label: Text(l.addScreenshots),
+                        ),
+                        OutlinedButton.icon(
+                          onPressed:
+                              editable &&
+                                  !state.attachments.any(
+                                    (a) => a.kind == AttachmentKind.video,
+                                  )
+                              ? cubit.addVideo
+                              : null,
+                          icon: const Icon(Icons.video_library_outlined),
+                          label: Text(l.addVideo),
+                        ),
+                      ],
+                    ),
+                    for (final attachment in state.attachments)
+                      Card(
+                        margin: const EdgeInsets.only(top: 12),
+                        child: ListTile(
+                          onTap: editable
+                              ? () => Navigator.push(
+                                  context,
+                                  MaterialPageRoute<void>(
+                                    builder: (_) => AttachmentPreview(
+                                      attachment: attachment,
+                                    ),
+                                  ),
+                                )
+                              : null,
+                          leading: attachment.kind == AttachmentKind.image
+                              ? ClipRRect(
+                                  borderRadius: BorderRadius.circular(8),
+                                  child: Image.file(
+                                    File(attachment.path),
+                                    width: 56,
+                                    height: 56,
+                                    fit: BoxFit.cover,
+                                    errorBuilder: (_, error, stack) =>
+                                        const Icon(Icons.broken_image_outlined),
+                                  ),
+                                )
+                              : const Icon(
+                                  Icons.play_circle_outline_rounded,
+                                  size: 40,
+                                ),
+                          title: Text(
+                            attachment.name,
+                            maxLines: 1,
+                            overflow: TextOverflow.ellipsis,
                           ),
-                    title: Text(
-                      attachment.name,
-                      maxLines: 1,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                    subtitle: Text(
-                      '${(attachment.bytes / (1024 * 1024)).toStringAsFixed(1)} MB · ${l.previewAttachment}',
-                    ),
-                    trailing: IconButton(
-                      tooltip: l.removeAttachment,
-                      onPressed: editable
-                          ? () => cubit.removeAttachment(attachment)
-                          : null,
-                      icon: const Icon(Icons.close_rounded),
-                    ),
-                  ),
+                          subtitle: Text(
+                            '${(attachment.bytes / (1024 * 1024)).toStringAsFixed(1)} MB · ${l.previewAttachment}',
+                          ),
+                          trailing: IconButton(
+                            tooltip: l.removeAttachment,
+                            onPressed: editable
+                                ? () => cubit.removeAttachment(attachment)
+                                : null,
+                            icon: const Icon(Icons.close_rounded),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
-              const SizedBox(height: 20),
-              SwitchListTile.adaptive(
-                contentPadding: EdgeInsets.zero,
-                title: Text(l.reportDiagnostics),
-                subtitle: Text(l.reportDiagnosticsSubtitle),
-                value: state.diagnostics != null,
-                onChanged: editable
-                    ? (value) => cubit.diagnosticsChanged(enabled: value)
-                    : null,
               ),
-              if (state.diagnostics != null)
-                Card(
-                  child: Padding(
-                    padding: const EdgeInsets.all(14),
-                    child: SelectableText(
-                      const JsonEncoder.withIndent('  ')
-                          .convert(state.diagnostics),
+              const SizedBox(height: 16),
+              AppSectionCard(
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                      l.privacyTitle,
+                      style: Theme.of(context).textTheme.titleLarge,
                     ),
-                  ),
+                    const SizedBox(height: 12),
+                    SwitchListTile.adaptive(
+                      contentPadding: EdgeInsets.zero,
+                      title: Text(l.reportDiagnostics),
+                      subtitle: Text(l.reportDiagnosticsSubtitle),
+                      value: state.diagnostics != null,
+                      onChanged: editable
+                          ? (value) => cubit.diagnosticsChanged(enabled: value)
+                          : null,
+                    ),
+                    if (state.diagnostics != null)
+                      Card(
+                        child: ExpansionTile(
+                          title: Text(
+                            l.reportDiagnostics,
+                            style: Theme.of(context).textTheme.bodyMedium,
+                          ),
+                          childrenPadding: const EdgeInsets.all(16),
+                          children: [
+                            SelectableText(
+                              const JsonEncoder.withIndent('  ')
+                                  .convert(state.diagnostics),
+                              style: const TextStyle(
+                                fontFamily: 'monospace',
+                                fontSize: 12,
+                                color: AppTheme.ink,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    CheckboxListTile(
+                      key: const Key('report_consent'),
+                      contentPadding: EdgeInsets.zero,
+                      controlAffinity: ListTileControlAffinity.leading,
+                      title: Text(
+                        l.reportConsent,
+                        style: Theme.of(context).textTheme.bodyMedium,
+                      ),
+                      value: state.consent,
+                      onChanged: editable
+                          ? (value) =>
+                                cubit.consentChanged(consent: value ?? false)
+                          : null,
+                    ),
+                  ],
                 ),
-              CheckboxListTile(
-                key: const Key('report_consent'),
-                contentPadding: EdgeInsets.zero,
-                controlAffinity: ListTileControlAffinity.leading,
-                title: Text(
-                  l.reportConsent,
-                  style: Theme.of(context).textTheme.bodyMedium,
-                ),
-                value: state.consent,
-                onChanged: editable
-                    ? (value) => cubit.consentChanged(consent: value ?? false)
-                    : null,
               ),
               if (state.problem != null) ...[
                 const SizedBox(height: 12),
-                _Notice(text: reportProblemText(l, state.problem!)),
+                AppNotice(text: reportProblemText(l, state.problem!)),
               ],
               if (state.preparing) ...[
                 const SizedBox(height: 16),
@@ -384,20 +421,5 @@ class _ReportFormState extends State<_ReportForm> {
         ),
       );
     },
-  );
-}
-
-class _Notice extends StatelessWidget {
-  const _Notice({required this.text});
-  final String text;
-
-  @override
-  Widget build(BuildContext context) => Container(
-    padding: const EdgeInsets.all(16),
-    decoration: BoxDecoration(
-      color: const Color(0xffffF1D6),
-      borderRadius: BorderRadius.circular(16),
-    ),
-    child: Text(text, style: const TextStyle(color: Color(0xff714D00))),
   );
 }

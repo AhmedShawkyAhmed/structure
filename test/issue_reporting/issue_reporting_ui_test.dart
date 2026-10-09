@@ -4,6 +4,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:mocktail/mocktail.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:structure/core/di/service_locator.dart';
+import 'package:structure/core/resources/app_theme.dart';
 import 'package:structure/core/routing/app_router.dart';
 import 'package:structure/features/issue_reporting/data/issue_draft_store.dart';
 import 'package:structure/features/issue_reporting/data/issue_report.dart';
@@ -54,13 +55,21 @@ void main() {
   Future<void> launch(
     WidgetTester tester, {
     Locale locale = const Locale('en'),
+    Size size = const Size(390, 844),
+    double textScale = 1,
   }) async {
-    tester.view.physicalSize = const Size(390, 844);
+    tester.view.physicalSize = size;
     tester.view.devicePixelRatio = 1;
     addTearDown(tester.view.resetPhysicalSize);
     addTearDown(tester.view.resetDevicePixelRatio);
     await tester.pumpWidget(
       MaterialApp(
+        theme: AppTheme.light,
+        builder: (context, child) => MediaQuery(
+          data: MediaQuery.of(context)
+              .copyWith(textScaler: TextScaler.linear(textScale)),
+          child: child!,
+        ),
         navigatorKey: navigatorKey,
         navigatorObservers: [controller.routeObserver],
         locale: locale,
@@ -76,11 +85,18 @@ void main() {
     'launcher has separate feature entries; cancelling never opens a draft',
     (tester) async {
       await launch(tester);
-      expect(find.text('Twist music'), findsOneWidget);
+      expect(find.text('Twist music'), findsNothing);
+      expect(find.text('Discover music'), findsNothing);
       expect(find.text('Device info'), findsOneWidget);
-      expect(find.text('Issue reporting'), findsOneWidget);
+      expect(find.text('Shake to report'), findsOneWidget);
+      expect(
+        tester.getTopLeft(find.text('Device info')).dx,
+        lessThan(tester.getTopLeft(find.text('Shake to report')).dx),
+      );
       await tester.tap(find.byTooltip('Report an issue'));
       await tester.pumpAndSettle();
+      expect(find.byType(BottomSheet), findsOneWidget);
+      expect(find.byType(AlertDialog), findsNothing);
       final checkbox = tester.widget<CheckboxListTile>(
         find.byType(CheckboxListTile),
       );
@@ -93,6 +109,70 @@ void main() {
       await tester.pumpWidget(const SizedBox());
     },
   );
+
+  testWidgets(
+    'sheet dismisses by swipe, prevents duplicates, and resets screenshot choice',
+    (tester) async {
+      await launch(tester);
+      controller.openReporter();
+      controller.openReporter();
+      await tester.pumpAndSettle();
+      expect(find.byType(BottomSheet), findsOneWidget);
+      await tester.tap(find.byType(CheckboxListTile));
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<CheckboxListTile>(find.byType(CheckboxListTile)).value,
+        true,
+      );
+      await tester.fling(find.byType(BottomSheet), const Offset(0, 600), 2000);
+      await tester.pumpAndSettle();
+      expect(find.byType(BottomSheet), findsNothing);
+      expect(controller.opening, false);
+      verifyNever(() => store.load());
+      controller.openReporter();
+      await tester.pumpAndSettle();
+      expect(
+        tester.widget<CheckboxListTile>(find.byType(CheckboxListTile)).value,
+        false,
+      );
+      await tester.tap(find.byTooltip('Cancel'));
+      await tester.pumpAndSettle();
+      expect(controller.opening, false);
+      expect(tester.takeException(), null);
+      await tester.pumpWidget(const SizedBox());
+    },
+  );
+
+  testWidgets('compact Arabic sheet with large text keeps Continue reachable', (
+    tester,
+  ) async {
+    await launch(
+      tester,
+      locale: const Locale('ar'),
+      size: const Size(320, 568),
+      textScale: 1.6,
+    );
+    controller.openReporter();
+    await tester.pumpAndSettle();
+    expect(find.byType(BottomSheet), findsOneWidget);
+    await tester.scrollUntilVisible(
+      find.text('متابعة').hitTestable(),
+      150,
+      scrollable: find
+          .descendant(
+            of: find.byType(BottomSheet),
+            matching: find.byType(Scrollable),
+          )
+          .first,
+    );
+    await tester.tap(find.text('متابعة'));
+    await tester.pumpAndSettle();
+    expect(find.byKey(const Key('report_description')), findsOneWidget);
+    verify(() => store.load()).called(1);
+    expect(tester.takeException(), null);
+    await tester.pumpWidget(const SizedBox());
+    await tester.pumpAndSettle();
+  });
 
   testWidgets('restored report needs fresh consent; editing revokes consent', (
     tester,
@@ -196,7 +276,7 @@ void main() {
       findsOneWidget,
     );
     await tester.scrollUntilVisible(
-      find.byKey(const Key('report_consent')),
+      find.byKey(const Key('report_consent')).hitTestable(),
       300,
       scrollable: find.byType(Scrollable).first,
     );

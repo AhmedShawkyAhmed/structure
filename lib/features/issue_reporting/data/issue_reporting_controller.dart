@@ -7,6 +7,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../core/routing/app_routes.dart';
 import '../../localization/generated/app_localizations.dart';
+import '../ui/report_prompt_sheet.dart';
 import 'issue_report.dart';
 
 class ReportRouteObserver extends NavigatorObserver {
@@ -75,44 +76,22 @@ class IssueReportingController extends ChangeNotifier {
     notifyListeners();
     try {
       final screen = routeObserver.currentScreen;
-      var includeScreenshot = false;
-      final agreed = await showDialog<bool>(
+      final includeScreenshot = await showModalBottomSheet<bool>(
         context: navigator.context,
-        builder: (context) {
-          final l = AppLocalizations.of(context);
-          return StatefulBuilder(
-            builder: (context, update) => AlertDialog(
-              title: Text(l.reportIssue),
-              content: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(l.reportPrompt),
-                  CheckboxListTile(
-                    contentPadding: EdgeInsets.zero,
-                    title: Text(l.includeScreenshot),
-                    subtitle: Text(l.screenshotConsent),
-                    value: includeScreenshot,
-                    onChanged: (value) => update(() {
-                      includeScreenshot = value ?? false;
-                    }),
-                  ),
-                ],
-              ),
-              actions: [
-                TextButton(
-                  onPressed: () => Navigator.pop(context, false),
-                  child: Text(l.cancel),
-                ),
-                FilledButton(
-                  onPressed: () => Navigator.pop(context, true),
-                  child: Text(l.continueReport),
-                ),
-              ],
-            ),
-          );
-        },
+        isScrollControlled: true,
+        useSafeArea: true,
+        showDragHandle: true,
+        constraints: BoxConstraints(
+          maxWidth: 560,
+          maxHeight: MediaQuery.sizeOf(navigator.context).height * .9,
+        ),
+        sheetAnimationStyle: const AnimationStyle(
+          duration: Duration(milliseconds: 260),
+          reverseDuration: Duration(milliseconds: 220),
+        ),
+        builder: (_) => const ReportPromptSheet(),
       );
-      if (agreed != true || !navigator.mounted) {
+      if (includeScreenshot == null || !navigator.mounted) {
         return;
       }
       XFile? screenshot;

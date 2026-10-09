@@ -10,23 +10,18 @@ class AppFeature {
     required this.subtitle,
     required this.icon,
     required this.color,
+    this.visibleOnHome = true,
   });
   final AppRoutes route;
   final String Function(AppLocalizations) title;
   final String Function(AppLocalizations) subtitle;
   final IconData icon;
   final Color color;
+  final bool visibleOnHome;
 }
 
 /// Add a route and one entry here to expose a feature in the launcher.
 final appFeatures = <AppFeature>[
-  AppFeature(
-    route: AppRoutes.twist,
-    title: (l) => l.twistFeatureTitle,
-    subtitle: (l) => l.twistFeatureSubtitle,
-    icon: Icons.graphic_eq_rounded,
-    color: const Color(0xff7C5CFC),
-  ),
   AppFeature(
     route: AppRoutes.deviceInfo,
     title: (l) => l.deviceFeatureTitle,
@@ -36,10 +31,18 @@ final appFeatures = <AppFeature>[
   ),
   AppFeature(
     route: AppRoutes.issueReporting,
-    title: (l) => l.reportFeatureTitle,
+    title: (l) => l.shakeToReport,
     subtitle: (l) => l.reportFeatureSubtitle,
-    icon: Icons.bug_report_outlined,
+    icon: Icons.vibration_rounded,
     color: const Color(0xffDD7941),
+  ),
+  AppFeature(
+    route: AppRoutes.twist,
+    title: (l) => l.twistFeatureTitle,
+    subtitle: (l) => l.twistFeatureSubtitle,
+    icon: Icons.graphic_eq_rounded,
+    color: const Color(0xff7C5CFC),
+    visibleOnHome: false,
   ),
   AppFeature(
     route: AppRoutes.login,
