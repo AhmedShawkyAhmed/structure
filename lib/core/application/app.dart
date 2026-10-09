@@ -1,8 +1,10 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation_service/navigation_service.dart';
+import 'package:structure/core/di/service_locator.dart';
 import 'package:structure/core/helpers/localization_helper.dart';
 import 'package:structure/core/routing/app_router.dart';
+import 'package:structure/features/issue_reporting/data/issue_reporting_controller.dart';
 import 'package:structure/features/localization/generated/app_localizations.dart';
 import 'package:twist_music_player/twist_music_player.dart';
 
@@ -51,6 +53,9 @@ class _MyAppState extends State<MyApp> {
           supportedLocales: AppLocalizations.supportedLocales,
           locale: locale,
           navigatorKey: NavigationService.navigatorKey,
+          navigatorObservers: [
+            serviceLocator<IssueReportingController>().routeObserver,
+          ],
           debugShowCheckedModeBanner: false,
           onGenerateRoute: routes.onGenerateRoute,
           initialRoute: '/',

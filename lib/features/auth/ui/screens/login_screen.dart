@@ -6,6 +6,7 @@ import 'package:structure/core/shared/widgets/error_widget.dart';
 import 'package:structure/features/auth/cubit/auth_cubit.dart';
 import 'package:structure/features/auth/cubit/auth_state.dart';
 import 'package:structure/features/auth/data/requests/login_request.dart';
+import 'package:structure/features/localization/generated/app_localizations.dart';
 import 'package:ui_kit/ui_kit.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -43,6 +44,9 @@ class _LoginScreenState extends State<LoginScreen> {
           );
         },
         child: Scaffold(
+          appBar: AppBar(
+            title: Text(AppLocalizations.of(context).loginFeatureTitle),
+          ),
           body: Column(
             children: [
               const Text('Login Screen'),

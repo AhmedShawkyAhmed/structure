@@ -139,6 +139,432 @@ abstract class AppLocalizations {
   /// In ar, this message translates to:
   /// **'حاول مرة أخرى'**
   String get tryAgain;
+
+  /// No description provided for @featureHubTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'مساحة الميزات'**
+  String get featureHubTitle;
+
+  /// No description provided for @featureHubSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استكشف كل ميزة في مساحة مستقلة.'**
+  String get featureHubSubtitle;
+
+  /// No description provided for @twistFeatureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'موسيقى تويست'**
+  String get twistFeatureTitle;
+
+  /// No description provided for @twistFeatureSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتشف الأغاني واستمع إلى المقاطع الموسيقية.'**
+  String get twistFeatureSubtitle;
+
+  /// No description provided for @deviceFeatureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'معلومات الجهاز'**
+  String get deviceFeatureTitle;
+
+  /// No description provided for @deviceFeatureSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استكشف هوية الجهاز ومواصفاته وبيانات التشخيص.'**
+  String get deviceFeatureSubtitle;
+
+  /// No description provided for @reportFeatureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإبلاغ عن مشكلة'**
+  String get reportFeatureTitle;
+
+  /// No description provided for @reportFeatureSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أرسل ملاحظاتك مع صور الشاشة والفيديو.'**
+  String get reportFeatureSubtitle;
+
+  /// No description provided for @loginFeatureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تسجيل الدخول'**
+  String get loginFeatureTitle;
+
+  /// No description provided for @loginFeatureSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'جرّب خطوات المصادقة وتسجيل الدخول.'**
+  String get loginFeatureSubtitle;
+
+  /// No description provided for @registerFeatureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إنشاء حساب'**
+  String get registerFeatureTitle;
+
+  /// No description provided for @registerFeatureSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استكشف تسجيل حساب جديد.'**
+  String get registerFeatureSubtitle;
+
+  /// No description provided for @onboardingFeatureTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'التعريف بالتطبيق'**
+  String get onboardingFeatureTitle;
+
+  /// No description provided for @onboardingFeatureSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'استعرض مقدمة التطبيق.'**
+  String get onboardingFeatureSubtitle;
+
+  /// No description provided for @reportIssue.
+  ///
+  /// In ar, this message translates to:
+  /// **'الإبلاغ عن مشكلة'**
+  String get reportIssue;
+
+  /// No description provided for @reportSimulationNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'وضع الاختبار: يتم محاكاة الإرسال دون رفع أي بلاغ.'**
+  String get reportSimulationNotice;
+
+  /// No description provided for @reportSimulatedTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'اكتملت المحاكاة'**
+  String get reportSimulatedTitle;
+
+  /// No description provided for @reportSimulatedSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم يتم رفع أي بلاغ. راجع وحدة التحكم للاطلاع على الطلب والاستجابة التجريبية.'**
+  String get reportSimulatedSubtitle;
+
+  /// No description provided for @reportPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'صف المشكلة واختر ما تريد مشاركته مع فريق دعم التطبيق. لن يتم رفع أي شيء حتى تراجع التقرير وتضغط إرسال.'**
+  String get reportPrompt;
+
+  /// No description provided for @includeScreenshot.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرفاق الشاشة الحالية'**
+  String get includeScreenshot;
+
+  /// No description provided for @screenshotConsent.
+  ///
+  /// In ar, this message translates to:
+  /// **'سيتم التقاط شاشة التطبيق بعد المتابعة. يمكنك معاينتها وإزالتها قبل الإرسال.'**
+  String get screenshotConsent;
+
+  /// No description provided for @cancel.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء'**
+  String get cancel;
+
+  /// No description provided for @continueReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'متابعة'**
+  String get continueReport;
+
+  /// No description provided for @screenshotFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر التقاط الشاشة. يمكنك إرفاق صورة من معرض الصور.'**
+  String get screenshotFailed;
+
+  /// No description provided for @shakeToReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'هز الجهاز للإبلاغ'**
+  String get shakeToReport;
+
+  /// No description provided for @shakeSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'هز جهازك أثناء فتح التطبيق لبدء تقرير.'**
+  String get shakeSubtitle;
+
+  /// No description provided for @reportHomeTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'ساعدنا على التحسين'**
+  String get reportHomeTitle;
+
+  /// No description provided for @reportHomeSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخبرنا بالمشكلة واختر الصور والفيديو والتفاصيل التقنية التي تريد مشاركتها.'**
+  String get reportHomeSubtitle;
+
+  /// No description provided for @startReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'بدء تقرير'**
+  String get startReport;
+
+  /// No description provided for @reportMediaLimits.
+  ///
+  /// In ar, this message translates to:
+  /// **'حتى ٣ صور JPG/PNG وفيديو MP4/MOV واحد. الحد الأقصى ٥٠ ميجابايت لكل ملف و٦٠ ثانية للفيديو.'**
+  String get reportMediaLimits;
+
+  /// No description provided for @reportDraftNotice.
+  ///
+  /// In ar, this message translates to:
+  /// **'يتم حفظ الوصف والملفات المختارة كمسودة على هذا الجهاز حتى ترسلها أو تحذفها.'**
+  String get reportDraftNotice;
+
+  /// No description provided for @uploadNotConfigured.
+  ///
+  /// In ar, this message translates to:
+  /// **'رفع التقارير غير متاح بعد. يمكنك إعداد مسودة وإرسالها عند توصيل خدمة الدعم.'**
+  String get uploadNotConfigured;
+
+  /// No description provided for @reportDescription.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماذا حدث؟'**
+  String get reportDescription;
+
+  /// No description provided for @reportDescriptionHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'صف المشكلة والخطوات التي تؤدي إليها…'**
+  String get reportDescriptionHint;
+
+  /// No description provided for @reportExpected.
+  ///
+  /// In ar, this message translates to:
+  /// **'ماذا توقعت أن يحدث؟ (اختياري)'**
+  String get reportExpected;
+
+  /// No description provided for @reportExpectedHint.
+  ///
+  /// In ar, this message translates to:
+  /// **'أخبرنا بما كان ينبغي أن يحدث…'**
+  String get reportExpectedHint;
+
+  /// No description provided for @reportAttachments.
+  ///
+  /// In ar, this message translates to:
+  /// **'المرفقات'**
+  String get reportAttachments;
+
+  /// No description provided for @addScreenshots.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة صور'**
+  String get addScreenshots;
+
+  /// No description provided for @addVideo.
+  ///
+  /// In ar, this message translates to:
+  /// **'إضافة فيديو'**
+  String get addVideo;
+
+  /// No description provided for @removeAttachment.
+  ///
+  /// In ar, this message translates to:
+  /// **'إزالة المرفق'**
+  String get removeAttachment;
+
+  /// No description provided for @previewAttachment.
+  ///
+  /// In ar, this message translates to:
+  /// **'معاينة المرفق'**
+  String get previewAttachment;
+
+  /// No description provided for @reportDiagnostics.
+  ///
+  /// In ar, this message translates to:
+  /// **'تضمين التفاصيل التقنية'**
+  String get reportDiagnostics;
+
+  /// No description provided for @reportDiagnosticsSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'إصدار التطبيق ونظام التشغيل وطراز الجهاز والمنصة فقط. راجع التفاصيل التي تم جمعها أدناه.'**
+  String get reportDiagnosticsSubtitle;
+
+  /// No description provided for @reportConsent.
+  ///
+  /// In ar, this message translates to:
+  /// **'أوافق على مشاركة هذا الوصف والمرفقات المختارة وأي تفاصيل تقنية مفعّلة مع فريق دعم التطبيق.'**
+  String get reportConsent;
+
+  /// No description provided for @sendReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'إرسال التقرير'**
+  String get sendReport;
+
+  /// No description provided for @retryReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'إعادة الإرسال'**
+  String get retryReport;
+
+  /// No description provided for @sendingReport.
+  ///
+  /// In ar, this message translates to:
+  /// **'جارٍ إرسال التقرير…'**
+  String get sendingReport;
+
+  /// No description provided for @cancelUpload.
+  ///
+  /// In ar, this message translates to:
+  /// **'إلغاء الرفع'**
+  String get cancelUpload;
+
+  /// No description provided for @reportSentTitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم استلام التقرير'**
+  String get reportSentTitle;
+
+  /// No description provided for @reportSentSubtitle.
+  ///
+  /// In ar, this message translates to:
+  /// **'شكراً لك. استلم فريق دعم التطبيق تقريرك.'**
+  String get reportSentSubtitle;
+
+  /// No description provided for @reportReference.
+  ///
+  /// In ar, this message translates to:
+  /// **'الرقم المرجعي'**
+  String get reportReference;
+
+  /// No description provided for @done.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم'**
+  String get done;
+
+  /// No description provided for @discardDraft.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف المسودة'**
+  String get discardDraft;
+
+  /// No description provided for @discardDraftPrompt.
+  ///
+  /// In ar, this message translates to:
+  /// **'هل تريد حذف مسودة التقرير والنسخ المحلية من المرفقات؟'**
+  String get discardDraftPrompt;
+
+  /// No description provided for @discard.
+  ///
+  /// In ar, this message translates to:
+  /// **'حذف'**
+  String get discard;
+
+  /// No description provided for @reportDescriptionRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجى وصف المشكلة.'**
+  String get reportDescriptionRequired;
+
+  /// No description provided for @reportConsentRequired.
+  ///
+  /// In ar, this message translates to:
+  /// **'يرجى الموافقة على مشاركة التقرير قبل إرساله.'**
+  String get reportConsentRequired;
+
+  /// No description provided for @reportTooManyImages.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكنك إرفاق ٣ صور كحد أقصى.'**
+  String get reportTooManyImages;
+
+  /// No description provided for @reportTooManyVideos.
+  ///
+  /// In ar, this message translates to:
+  /// **'يمكنك إرفاق فيديو واحد.'**
+  String get reportTooManyVideos;
+
+  /// No description provided for @reportFileTooLarge.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر ملفاً غير فارغ لا يزيد حجمه عن ٥٠ ميجابايت.'**
+  String get reportFileTooLarge;
+
+  /// No description provided for @reportUnsupportedMedia.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر صورة JPG/PNG أو فيديو MP4/MOV.'**
+  String get reportUnsupportedMedia;
+
+  /// No description provided for @reportVideoTooLong.
+  ///
+  /// In ar, this message translates to:
+  /// **'اختر فيديو لا تتجاوز مدته ٦٠ ثانية.'**
+  String get reportVideoTooLong;
+
+  /// No description provided for @reportMediaUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر فتح الملف. جرّب ملفاً آخر.'**
+  String get reportMediaUnavailable;
+
+  /// No description provided for @reportStorageUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر حفظ المسودة محلياً. حاول مرة أخرى.'**
+  String get reportStorageUnavailable;
+
+  /// No description provided for @reportDiagnosticsUnavailable.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر جمع التفاصيل التقنية. يمكنك إرسال التقرير بدونها.'**
+  String get reportDiagnosticsUnavailable;
+
+  /// No description provided for @reportUploadFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر إرسال التقرير. تم الاحتفاظ بالمسودة؛ حاول مجدداً.'**
+  String get reportUploadFailed;
+
+  /// No description provided for @reportInvalidResponse.
+  ///
+  /// In ar, this message translates to:
+  /// **'لم تؤكد خدمة الدعم استلام التقرير. تم الاحتفاظ بالمسودة؛ إعادة المحاولة تستخدم نفس معرّف التقرير.'**
+  String get reportInvalidResponse;
+
+  /// No description provided for @reportCancelled.
+  ///
+  /// In ar, this message translates to:
+  /// **'تم إلغاء الرفع والاحتفاظ بالمسودة. قد يكون الخادم استلم التقرير بالفعل؛ إعادة المحاولة تستخدم نفس معرّفه.'**
+  String get reportCancelled;
+
+  /// No description provided for @shakeSettingFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذر حفظ إعداد الهز. حاول مرة أخرى.'**
+  String get shakeSettingFailed;
+
+  /// No description provided for @videoPreviewFailed.
+  ///
+  /// In ar, this message translates to:
+  /// **'تعذرت معاينة الفيديو.'**
+  String get videoPreviewFailed;
+
+  /// No description provided for @reportScreen.
+  ///
+  /// In ar, this message translates to:
+  /// **'الشاشة التي حدثت فيها المشكلة'**
+  String get reportScreen;
 }
 
 class _AppLocalizationsDelegate

@@ -24,6 +24,10 @@
 	<string>$(FLUTTER_BUILD_NUMBER)</string>
 	<key>LSRequiresIPhoneOS</key>
 	<true/>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>Select screenshots and videos to attach to an issue report.</string>
+	<key>NSMotionUsageDescription</key>
+	<string>Detect shaking to open the issue reporter while the app is active.</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>audio</string>

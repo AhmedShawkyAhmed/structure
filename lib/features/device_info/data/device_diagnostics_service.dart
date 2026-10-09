@@ -22,10 +22,8 @@ class DeviceSnapshot {
 
 class DeviceDiagnosticsService {
   DeviceDiagnosticsService({
-    MethodChannel channel = const MethodChannel(
-      'com.shawky.structure/device_info',
-    ),
-  }) : _channel = channel;
+    this._channel = const MethodChannel('com.shawky.structure/device_info'),
+  });
 
   final MethodChannel _channel;
 

@@ -1,6 +1,9 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:structure/core/di/service_locator.dart';
 import 'package:structure/core/helpers/localization_helper.dart';
+import 'package:structure/features/home/data/app_features.dart';
+import 'package:structure/features/issue_reporting/data/issue_reporting_controller.dart';
 import 'package:structure/features/localization/generated/app_localizations.dart';
 import 'package:twist_music_player/twist_music_player.dart';
 
@@ -9,203 +12,136 @@ class HomeView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context);
+    final l = AppLocalizations.of(context);
     final isArabic = Localizations.localeOf(context).languageCode == 'ar';
     return Scaffold(
-      backgroundColor: const Color(0xFFF7F8FC),
+      backgroundColor: const Color(0xffF7F8FC),
       appBar: AppBar(
+        title: const Text('Structure'),
         backgroundColor: Colors.transparent,
-        elevation: 0,
-        scrolledUnderElevation: 0,
-        titleSpacing: 20,
-        title: const _AppTitle(),
         actions: [
-          Padding(
-            padding: const EdgeInsetsDirectional.only(end: 12),
-            child: TextButton.icon(
-              onPressed: () => _changeLanguage(isArabic),
-              icon: const Icon(Icons.language_rounded),
-              label: Text(
-                isArabic ? localizations.english : localizations.arabic,
-              ),
-            ),
+          IconButton(
+            tooltip: l.reportIssue,
+            onPressed: serviceLocator<IssueReportingController>().openReporter,
+            icon: const Icon(Icons.bug_report_outlined),
           ),
+          TextButton.icon(
+            onPressed: () => LocalizationHelper.changeLocal(
+              isArabic ? Languages.en : Languages.ar,
+            ),
+            icon: const Icon(Icons.language_rounded),
+            label: Text(isArabic ? l.english : l.arabic),
+          ),
+          const SizedBox(width: 8),
         ],
       ),
-      body: Builder(
-        builder: (context) {
-          return ListView(
-            padding: EdgeInsets.only(
-              bottom: TwistPlayerHost.bottomPaddingOf(context) + 24,
-            ),
-            children: [
-              const Padding(
-                padding: EdgeInsets.fromLTRB(20, 16, 20, 2),
-                child: _WelcomeCard(),
-              ),
-              TwistMusicSwimlane(
-                style: TwistSwimlaneStyle.banner,
-                backgroundColor: Colors.transparent,
-                emptyBuilder: (context) => const _EmptyMusicState(),
-              ),
-            ],
-          );
-        },
-      ),
-    );
-  }
-
-  Future<void> _changeLanguage(bool isArabic) async {
-    LocalizationHelper.changeLocal(isArabic ? Languages.en : Languages.ar);
-    await TwistMusicPlayer.instance.laneController.reload();
-  }
-}
-
-class _AppTitle extends StatelessWidget {
-  const _AppTitle();
-
-  @override
-  Widget build(BuildContext context) {
-    return Row(
-      children: [
-        Container(
-          width: 38,
-          height: 38,
-          padding: const EdgeInsets.all(5),
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(12),
-            boxShadow: const [
-              BoxShadow(
-                color: Color(0x14000000),
-                blurRadius: 16,
-                offset: Offset(0, 5),
-              ),
-            ],
-          ),
-          child: Image.asset('assets/images/pngs/logo.png'),
+      body: ListView(
+        padding: EdgeInsets.fromLTRB(
+          20,
+          16,
+          20,
+          TwistPlayerHost.bottomPaddingOf(context) + 32,
         ),
-        const SizedBox(width: 12),
-        Text(
-          'Structure',
-          style: Theme.of(context).textTheme.titleLarge?.copyWith(
-            fontWeight: FontWeight.w800,
-            letterSpacing: -0.5,
-          ),
-        ),
-      ],
-    );
-  }
-}
-
-class _WelcomeCard extends StatelessWidget {
-  const _WelcomeCard();
-
-  @override
-  Widget build(BuildContext context) {
-    final textTheme = Theme.of(context).textTheme;
-    final localizations = AppLocalizations.of(context);
-    return Container(
-      padding: const EdgeInsets.all(22),
-      decoration: BoxDecoration(
-        gradient: const LinearGradient(
-          begin: Alignment.topLeft,
-          end: Alignment.bottomRight,
-          colors: [Color(0xFF151A2D), Color(0xFF343B63)],
-        ),
-        borderRadius: BorderRadius.circular(28),
-      ),
-      child: Row(
         children: [
-          Expanded(
+          Container(
+            padding: const EdgeInsets.all(26),
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(28),
+              gradient: const LinearGradient(
+                colors: [Color(0xff151A2D), Color(0xff343B63)],
+                begin: Alignment.topLeft,
+                end: Alignment.bottomRight,
+              ),
+            ),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const Icon(
+                  Icons.widgets_rounded,
+                  color: Color(0xffBAA9FF),
+                  size: 36,
+                ),
+                const SizedBox(height: 18),
                 Text(
-                  localizations.musicHeroTitle,
-                  style: textTheme.headlineSmall?.copyWith(
+                  l.featureHubTitle,
+                  style: Theme.of(context).textTheme.headlineMedium?.copyWith(
                     color: Colors.white,
                     fontWeight: FontWeight.w800,
-                    height: 1.1,
                   ),
                 ),
-                const SizedBox(height: 9),
+                const SizedBox(height: 10),
                 Text(
-                  localizations.musicHeroSubtitle,
-                  style: textTheme.bodyMedium?.copyWith(
-                    color: Colors.white70,
-                    height: 1.45,
-                  ),
+                  l.featureHubSubtitle,
+                  style: const TextStyle(color: Colors.white70, height: 1.5),
                 ),
               ],
             ),
           ),
-          const SizedBox(width: 16),
-          Container(
-            width: 62,
-            height: 62,
-            decoration: const BoxDecoration(
-              color: Color(0xFF7C5CFC),
-              shape: BoxShape.circle,
+          const SizedBox(height: 22),
+          for (final feature in appFeatures)
+            Padding(
+              padding: const EdgeInsets.only(bottom: 12),
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 0,
+                color: Colors.white,
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(22),
+                  side: const BorderSide(color: Color(0xffE8EAF2)),
+                ),
+                child: InkWell(
+                  borderRadius: BorderRadius.circular(22),
+                  onTap: () => Navigator.pushNamed(context, feature.route.path),
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Row(
+                      children: [
+                        Container(
+                          width: 54,
+                          height: 54,
+                          decoration: BoxDecoration(
+                            color: feature.color.withValues(alpha: 0.1),
+                            borderRadius: BorderRadius.circular(17),
+                          ),
+                          child: Icon(
+                            feature.icon,
+                            color: feature.color,
+                            size: 28,
+                          ),
+                        ),
+                        const SizedBox(width: 16),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                feature.title(l),
+                                style: Theme.of(context).textTheme.titleMedium
+                                    ?.copyWith(fontWeight: FontWeight.w700),
+                              ),
+                              const SizedBox(height: 5),
+                              Text(
+                                feature.subtitle(l),
+                                style: const TextStyle(
+                                  color: Color(0xff74788D),
+                                  height: 1.4,
+                                ),
+                              ),
+                            ],
+                          ),
+                        ),
+                        const SizedBox(width: 12),
+                        const Icon(
+                          Icons.chevron_right_rounded,
+                          color: Color(0xff9DA2B5),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+              ),
             ),
-            child: const Icon(
-              Icons.graphic_eq_rounded,
-              color: Colors.white,
-              size: 34,
-            ),
-          ),
         ],
-      ),
-    );
-  }
-}
-
-class _EmptyMusicState extends StatelessWidget {
-  const _EmptyMusicState();
-
-  @override
-  Widget build(BuildContext context) {
-    final localizations = AppLocalizations.of(context);
-    return Padding(
-      padding: const EdgeInsets.fromLTRB(20, 24, 20, 8),
-      child: Container(
-        padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 32),
-        decoration: BoxDecoration(
-          color: Colors.white,
-          borderRadius: BorderRadius.circular(24),
-          border: Border.all(color: const Color(0xFFE8EAF2)),
-        ),
-        child: Column(
-          children: [
-            const Icon(
-              Icons.headphones_rounded,
-              color: Color(0xFF7C5CFC),
-              size: 42,
-            ),
-            const SizedBox(height: 14),
-            Text(
-              localizations.musicEmptyTitle,
-              textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.w700),
-            ),
-            const SizedBox(height: 6),
-            Text(
-              localizations.musicEmptySubtitle,
-              textAlign: TextAlign.center,
-              style: Theme.of(
-                context,
-              ).textTheme.bodyMedium?.copyWith(color: const Color(0xFF74788D)),
-            ),
-            const SizedBox(height: 18),
-            OutlinedButton.icon(
-              onPressed: TwistMusicPlayer.instance.laneController.reload,
-              icon: const Icon(Icons.refresh_rounded),
-              label: Text(localizations.tryAgain),
-            ),
-          ],
-        ),
       ),
     );
   }

@@ -202,6 +202,8 @@ class _Header extends StatelessWidget {
         children: <Widget>[
           Row(
             children: <Widget>[
+              if (Navigator.canPop(context))
+                const BackButton(color: Colors.white),
               Container(
                 width: 44,
                 height: 44,

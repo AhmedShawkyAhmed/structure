@@ -1,7 +1,7 @@
 import 'package:core_utils/core_utils.dart';
 import 'package:flutter/material.dart';
+import 'package:structure/core/application/app_bootstrap.dart';
 import 'package:structure/core/resources/app_colors.dart';
-import 'package:structure/main.dart';
 
 class TestWidget extends StatelessWidget {
   const TestWidget({super.key});
