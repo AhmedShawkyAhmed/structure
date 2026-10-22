@@ -85,7 +85,7 @@ void main() {
     'launcher has separate feature entries; cancelling never opens a draft',
     (tester) async {
       await launch(tester);
-      expect(find.text('Twist music'), findsNothing);
+      expect(find.text('Twist music'), findsOneWidget);
       expect(find.text('Discover music'), findsNothing);
       expect(find.text('Device info'), findsOneWidget);
       expect(find.text('Shake to report'), findsOneWidget);

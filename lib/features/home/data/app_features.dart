@@ -42,7 +42,6 @@ final appFeatures = <AppFeature>[
     subtitle: (l) => l.twistFeatureSubtitle,
     icon: Icons.graphic_eq_rounded,
     color: const Color(0xff7C5CFC),
-    visibleOnHome: false,
   ),
   AppFeature(
     route: AppRoutes.login,
